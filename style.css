@@ -1,0 +1,659 @@
+fix
+    /* 🌐 General Reset and Font */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ✅ Default Body Style with advanced background */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out; /* Slower, smoother theme transition */
+    background-size: 200% 200%; /* For dynamic background */
+    animation: backgroundShift 20s ease infinite alternate; /* Subtle background movement */
+}
+
+/* Keyframes for background animation */
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 🌞 Light Theme */
+body.light {
+    background-color: #f0f0f0; /* Default solid for light theme */
+    background-image: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+    color: #222;
+}
+
+/* 🌙 Dark Theme */
+body.dark {
+    background-color: #121212; /* Default solid for dark theme */
+    background-image: linear-gradient(135deg, #121212 0%, #2a2a2a 50%, #121212 100%);
+    color: #e5e5e5;
+}
+
+/* 🎯 Center Login Page with Flex */
+body.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 1rem;
+}
+
+/* 🔲 Main Layout */
+main {
+    flex-grow: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* Slightly increased gap for more breathing room */
+    text-align: center;
+}
+
+/* 🔑 Login Container */
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05); /* More subtle background for better blur effect */
+    border-radius: 16px; /* Slightly more rounded */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); /* Deeper, softer shadow */
+    backdrop-filter: blur(10px); /* Increased blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Subtle border */
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.login-container:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.2);
+}
+
+/* 🌙 Dark Mode for login container */
+body.dark .login-container {
+    background: rgba(0, 0, 0, 0.3); /* Darker subtle background */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+body.dark .login-container:hover {
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.6);
+}
+
+
+/* 🧾 Login Inputs and Textarea - Unified Style */
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 0.9rem; /* Slightly more padding */
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(150, 150, 150, 0.3); /* Softer border */
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle transparent background */
+    color: inherit; /* Inherit text color from body */
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff; /* Focus highlight */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Subtle glow */
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque on focus */
+}
+
+body.dark input[type="email"],
+body.dark input[type="password"],
+body.dark textarea {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(80, 80, 80, 0.3);
+}
+
+body.dark input[type="email"]:focus,
+body.dark input[type="password"]:focus,
+body.dark textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 🔘 Button Style - ALL BLACK & ADVANCED ANIMATIONS */
+button {
+    background-color: #000; /* Solid Black */
+    color: white;
+    border: 2px solid transparent; /* Added border for animation */
+    border-radius: 8px;
+    padding: 0.9rem 1.6rem; /* Increased padding */
+    font-size: 1.05rem; /* Slightly larger text */
+    margin: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deeper initial shadow */
+    transform: perspective(1px) translateZ(0); /* Improve rendering performance */
+}
+
+button:hover {
+    background-color: #1a1a1a; /* Darker on hover, not pure black */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+    transform: translateY(-3px); /* Stronger lift effect */
+    border-color: #007bff; /* Blue border glow */
+}
+
+button:active {
+    background-color: #333; /* Even darker on active */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(0); /* Return to original Y on press */
+}
+
+
+/* 🧮 Counter Circle Button - More Advanced */
+#tapButton {
+    width: 200px; /* Slightly larger */
+    height: 200px;
+    font-size: 2.2rem; /* Larger text */
+    font-weight: bold;
+    border-radius: 50%;
+    border: 5px solid transparent; /* Border for glowing effect */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); /* Radial gradient for depth */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.6); /* Initial blue glow */
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    position: relative;
+    overflow: hidden;
+    animation: pulseGlow 3s infinite alternate; /* Continuous subtle glow */
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 30px rgba(0, 191, 255, 0.6), 0 0 15px rgba(0, 191, 255, 0.3) inset;
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.4) inset;
+        transform: scale(1.02);
+    }
+}
+
+#tapButton:hover {
+    transform: scale(1.04); /* More pronounced grow */
+    box-shadow: 0 0 50px rgba(0, 191, 255, 1), 0 0 25px rgba(0, 191, 255, 0.5) inset; /* Stronger glow on hover */
+    border-color: #007bff; /* Solid border color on hover */
+}
+
+#tapButton:active {
+    transform: scale(0.98); /* Slight press */
+    background: radial-gradient(circle at center, #000 0%, #1a1a1a 100%); /* Invert gradient on press */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4), 0 0 10px rgba(0, 191, 255, 0.2) inset;
+}
+
+/* 🔵 Bubble Effect (created by JS, styled here) */
+.bubble {
+    position: absolute;
+    width: 60px; /* Slightly larger bubble */
+    height: 60px;
+    background: rgba(255, 255, 255, 0.7); /* Slightly brighter */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Centers the bubble on its origin */
+    animation: fadeOutScale 0.8s forwards; /* Faster fade out */
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+@keyframes fadeOutScale {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2); /* Scales out more */
+    }
+}
+
+
+/* ✅ Save status text - maybe a subtle fade in/out */
+#saveStatus {
+    margin-top: 1rem;
+    font-style: italic;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1; /* Default visible */
+}
+
+/* 🧭 Header + Nav */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem; /* More padding */
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle header background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.dark header {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.02);
+}
+
+header h1 {
+    margin-bottom: 0.8rem; /* More spacing */
+    font-size: 2.2rem; /* Larger title */
+    letter-spacing: 1px; /* Spaced out text */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+body.dark header h1 {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+}
+
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* More space between nav buttons */
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 600px) {
+    main {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    #tapButton {
+        width: 150px; /* Adjusted for mobile */
+        height: 150px;
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    textarea {
+        height: 120px; /* Smaller textarea */
+        font-size: 0.95rem;
+    }
+
+    header {
+        padding: 1rem 0.5rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .nav {
+        gap: 0.5rem;
+    }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.9rem;
+        color: #aaa;
+        background: transparent;
+        margin-top: auto;
+    }
+
+    body.dark footer {
+        color: #888;
+    }
+
+
+    .glow-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        text-shadow: 0 0 3px #111, /* soft dark halo */ 0 0 6px #222, /* medium */ 0 0 10px #000, /* strong black glow */ 0 0 20px #ffffff;
+        animation: blackGlowPulse 3s ease-in-out infinite;
+        margin-bottom: 0.5rem;
+    }
+
+    @keyframes blackGlowPulse {
+        0%, 100% {
+            text-shadow: 0 0 3px #ffffff,
+            0 0 6px #222,
+            0 0 10px #000,
+            0 0 20px #3c3939;
+        }
+        50% {
+            text-shadow: 0 0 6px #000,
+            0 0 10px #ffffff,
+            0 0 20px #333232,
+            0 0 30px #111;
+        }
+    }
+
+    /* 🧿 Wrapper to center ring + button */
+    .circle-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-top: 2rem;
+    }
+
+    /* 🔁 Animated glowing ring around the button */
+    .circle-ring {
+        position: absolute;
+        top: -12px;
+        left: -12px;
+        right: -12px;
+        bottom: -12px;
+        border-radius: 50%;
+        border: 3px solid #00f2ff;
+        box-shadow: 0 0 20px #00f2ff;
+        animation: spinGlow 2s linear infinite;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* 🌀 Spin + glow effect */
+    @keyframes spinGlow {
+        0% {
+            transform: rotate(0deg);
+            box-shadow: 0 0 8px #000;
+        }
+        50% {
+            box-shadow: 0 0 20px #00f2ff;
+        }
+        100% {
+            transform: rotate(360deg);
+            box-shadow: 0 0 8px #000;
+        }
+    }
+
+    /* 🟣 Main Prayer Button – Fixed Center Text */
+    .prayer-button {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+        border: none;
+        cursor: pointer;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+
+
+}
+
+.adjust-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.adjust-buttons button {
+    padding: 12px 22px;
+    font-size: 22px;
+    border-radius: 12px;
+    border: none;
+    background: #6c5ce7;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.adjust-buttons button:hover {
+    background: #4834d4;
+    transform: scale(1.1);
+}
+
+/* ------------------------- */
+/*   PLUS & MINUS BUTTONS    */
+/* ------------------------- */
+
+.counter-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.counter-btn {
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #5d54f0, #6f67ff);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Glass effect */
+    box-shadow:
+            0 4px 10px rgba(0, 0, 0, 0.5),
+            inset 0 2px 6px rgba(255, 255, 255, 0.15);
+
+    transition: all 0.2s ease;
+}
+
+/* Hover + Press effects */
+.counter-btn:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 8px 15px rgba(0, 0, 0, 0.6),
+            inset 0 2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.counter-btn:active {
+    transform: scale(0.95);
+    box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.4),
+            inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------- */
+/*   RESPONSIVE BEHAVIOR    */
+/* ------------------------- */
+
+/* Tablets */
+@media (max-width: 900px) {
+    .counter-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        border-radius: 12px;
+    }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    .counter-controls {
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .counter-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 26px;
+        border-radius: 10px;
+    }
+}
+
+.adjust-container {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.current-display {
+    font-size: 2.5rem;
+    margin: 10px auto;
+    padding: 10px;
+    color: #fff;
+}
+
+.adjust-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.adjust-btn {
+    width: 60px;
+    height: 55px;
+    font-size: 2rem;
+    background: #6a5af9;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(106, 90, 249, 0.7);
+}
+
+.adjust-btn:active {
+    transform: scale(0.95);
+}
+
+#adjustInput {
+    width: 90px;
+    padding: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.save-btn {
+    padding: 12px 25px;
+    background: #4CAF50;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ------------------------------
+   ADJUST PAGE GLOW BUTTONS
+   ------------------------------ */
+
+.adjust-btn {
+    width: 70px;
+    height: 60px;
+    font-size: 2rem;
+    background: #6a5af9;
+    border: none;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    /* Glow */
+    box-shadow: 0 0 18px rgba(106, 90, 249, 0.9),
+    0 0 30px rgba(106, 90, 249, 0.5);
+
+    /* Animation */
+    animation: pulseGlow 2s infinite ease-in-out;
+    transition: transform 0.1s ease;
+}
+
+.adjust-btn:active {
+    transform: scale(0.92);
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 18px rgb(39, 36, 149),
+        0 0 30px rgba(106, 90, 249, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 28px rgba(106, 90, 249, 1),
+        0 0 45px rgba(47, 28, 227, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 18px rgba(106, 90, 249, 1),
+        0 0 30px rgba(106, 90, 249, 0.6);
+    }
+}
+
+/* Input field styling */
+#adjustInput {
+    width: 110px;
+    padding: 12px;
+    font-size: 1.6rem;
+    text-align: center;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: #222;
+    color: white;
+    box-shadow: 0 0 12px rgba(255,255,255,0.1);
+}
+
+/* Save button */
+.save-btn {
+    padding: 14px 30px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+}
+
+.save-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .adjust-btn {
+        width: 60px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+
+    #adjustInput {
+        width: 90px;
+        font-size: 1.4rem;
+    }
+}
+
+/* FIX FOR RING BLOCKING BUTTON CLICKS */
+.circle-ring {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+.counter-controls,
+.counter-btn {
+    position: relative;
+    z-index: 9999 !important;
+}

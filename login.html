@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GoodApp Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body light">
+<main>
+  <div class="login-container">
+    <h2>Welcome to Pray Counter </h2> <br>
+    <h3>Login to count your pray </h3><br>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+      <button id="forgotPasswordBtn">Forgot Password</button>
+      <button id="toggleTheme">🌙 Dark Mode</button>
+    </div>
+  </div>
+</main>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<!-- YOUR CENTRAL FIREBASE INITIALIZATION -->
+<script src="firebase-init.js"></script>
+
+<!-- Your Custom Scripts -->
+<script src="login.js"></script>
+<script src="theme.js"></script>
+
+<footer>
+  <p>“Each tap is a step closer to God. Keep Praying.”</p>
+  &copy; 2025 Tanmoy Das. All rights reserved.
+</footer>
+
+</body>
+</html>

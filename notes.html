@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prayer Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+<header>
+  <h1>📝 Prayer Notes</h1>
+  <div class="nav">
+    <button onclick="goToCounter()">🔙 Back to Counter</button>
+    <button id="themeToggle">🌙 Dark Mode</button>
+    <button onclick="signOut()">🚪 Sign Out</button>
+  </div>
+</header>
+
+<main>
+  <textarea id="noteArea" placeholder="Write your prayer note here..."></textarea>
+  <button onclick="saveNote()">💾 Save Note</button>
+  <div id="saveStatus"></div>
+</main>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<!-- YOUR CENTRAL FIREBASE INITIALIZATION -->
+<script src="firebase-init.js"></script>
+
+<!-- Your Custom Scripts -->
+<script src="notes.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>

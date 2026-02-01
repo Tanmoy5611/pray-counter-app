@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tap Counter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="image.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="image.png">
+</head>
+<body class="light">
+<header>
+    <h2 class="glow-title"> Tap to Tranquility 📿</h2>
+    <div class="nav">
+        <button onclick="goToNotes()">📝 Prayer Notes</button>
+        <button id="themeToggle">🌙 Dark-Light Mode</button>
+        <button onclick="signOut()">🚪 Sign Out</button>
+    </div>
+</header>
+
+<main>
+    <div class="circle-wrapper">
+        <div class="circle-ring" id="glowRing"></div> <!-- 🔄 Animated ring -->
+        <button class="prayer-button" id="tapButton"> Prayers</button>
+    </div>
+    <h2>Taps: <span id="tap-count">0</span></h2>
+    <div class="counter-controls">
+        <button id="minusBtn" class="counter-btn">−</button>
+        <button id="plusBtn" class="counter-btn">+</button>
+    </div>
+    <div id="bubbleContainer"></div>
+</main>
+
+<!-- Firebase SDKs - These need to be loaded first! -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<!-- YOUR CENTRAL FIREBASE INITIALIZATION -->
+<script src="firebase-init.js"></script>
+
+
+<!-- Your Custom Scripts - These use the Firebase object initialized above -->
+<script src="app.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>
+
+
