@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Settings</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+
+<body class="light">
+
+<header class="app-header">
+  <h2>Profile Settings</h2>
+
+  <div class="nav">
+    <button onclick="goBack()" title="Back">
+      <i class="bi bi-house-heart-fill"></i>
+    </button>
+
+    <button id="themeToggle" title="Toggle Light / Dark Mode">
+      <i id="themeIcon" class="bi bi-moon-stars"></i>
+    </button>
+  </div>
+
+
+</header>
+
+<main class="settings-main">
+
+  <div class="settings-card">
+
+    <i class="bi bi-person-circle settings-avatar"></i>
+
+    <h3 class="settings-title">Edit Profile</h3>
+
+    <div class="input-group">
+      <i class="bi bi-person"></i>
+      <input
+              type="text"
+              id="nameInput"
+              placeholder="Enter your name"
+      >
+    </div>
+
+    <div class="vibe-settings-container">
+      <label class="vibe-label">
+        <i class="bi bi-reception-4"></i> Vibration Intensity
+      </label>
+      <div class="slider-wrapper">
+        <input
+                type="range"
+                id="vibeIntensity"
+                min="0"
+                max="100"
+                value="40"
+        >
+        <span id="vibeValue">40ms</span>
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveProfileName()">
+      <i class="bi bi-check-circle"></i>
+      Save
+    </button>
+
+    <p id="saveStatus" class="save-status"></p>
+
+  </div>
+
+</main>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script src="js/firebase/firebase-init.js"></script>
+<script src="js/settings/sett.js"></script>
+
+<script>
+
+  function goBack() {
+    window.location.href = "index.html";
+  }
+
+</script>
+<script src="js/theme.js"></script>
+
+
+</body>
+</html>

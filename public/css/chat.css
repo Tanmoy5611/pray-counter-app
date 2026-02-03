@@ -1,0 +1,250 @@
+/* ==========================================================================
+   ELITE CHAT UI - FINAL STABLE BUILD
+   Optimized for: iOS Safari, Android Chrome, and Desktop
+   ========================================================================== */
+
+:root {
+    --vh: 100dvh; /* Controlled by JS Visual Viewport */
+    --primary: #075e54;
+    --accent: #25d366;
+    --me-bg: #dcf8c6;
+    --other-bg: #ffffff;
+    --header-h: 64px;
+    --footer-h: auto;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+/* FIX: Lock the body to prevent background scrolling/panning when typing */
+html, body {
+    height: var(--vh);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed; /* Prevents layout shifting on mobile */
+    top: 0;
+    left: 0;
+}
+
+body.chat-page {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ece5dd;
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+    /* Do NOT animate height changes, it causes keyboard lag */
+    transition: background 0.3s ease;
+}
+
+/* ===== HEADER ===== */
+.chat-header {
+    flex-shrink: 0;
+    height: var(--header-h);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), #0b7c6c);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#chatHeader {
+    font-weight: 700;
+    font-size: 17px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#typingStatus {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.header-actions { display: flex; gap: 4px; }
+.header-actions button {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.header-actions button:active {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== MAIN CHAT BODY ===== */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+#messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Smooth scrolling for iOS */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar for Desktop */
+#messages::-webkit-scrollbar { width: 6px; }
+#messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+
+/* ===== BUBBLES ===== */
+.bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    word-wrap: break-word;
+}
+
+.me {
+    align-self: flex-end;
+    background: var(--me-bg);
+    border-radius: 16px 16px 2px 16px;
+    color: #111;
+}
+
+.other {
+    align-self: flex-start;
+    background: var(--other-bg);
+    border-radius: 16px 16px 16px 2px;
+    color: #111;
+}
+
+.meta {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.seen { color: #34b7f1; font-size: 14px; }
+
+/* ===== THE FIXED FOOTER (Stays above Keyboard) ===== */
+.chat-footer {
+    flex-shrink: 0; /* Prevents footer from disappearing */
+    background: #f0f0f0;
+    padding: 10px 12px;
+    /* Respect iPhone Notch/Home Bar */
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: flex-end; /* Grows with text if multi-line */
+    gap: 8px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#messageInput {
+    flex: 1;
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-size: 16px; /* CRITICAL: Prevents iOS auto-zoom on focus */
+    max-height: 120px;
+}
+
+#sendBtn {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
+}
+
+#sendBtn:active { transform: scale(0.9); }
+
+/* ===== SCROLL BTN ===== */
+.scroll-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    color: var(--primary);
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.scroll-btn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== DARK MODE ===== */
+body.dark { background: #0b141a; background-image: none; }
+body.dark .chat-header { background: #1f2c34; }
+body.dark .chat-footer { background: #1f2c34; border-top-color: #2a3942; }
+body.dark #messageInput { background: #2a3942; border: none; color: white; }
+body.dark .other { background: #202c33; color: #e9edef; }
+body.dark .me { background: #005c4b; color: #e9edef; }
+body.dark #sendBtn { background: #00a884; }
+body.dark .scroll-btn { background: #2a3942; color: #00a884; }
+
+/* Responsive Adjustments for Desktop */
+@media (min-width: 768px) {
+    .bubble { max-width: 60%; }
+    #messages { padding: 20px 10%; }
+}

@@ -1,0 +1,484 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Default Body Style with advanced background */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out; /* Slower, smoother theme transition */
+    background-size: 200% 200%; /* For dynamic background */
+    animation: backgroundShift 20s ease infinite alternate; /* Subtle background movement */
+}
+
+/* Keyframes for background animation */
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* 🌞 Light Theme */
+body.light {
+    background-color: #f0f0f0; /* Default solid for light theme */
+    background-image: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+    color: #222;
+}
+
+/* 🌙 Dark Theme */
+body.dark {
+    background-color: #121212; /* Default solid for dark theme */
+    background-image: linear-gradient(135deg, #121212 0%, #2a2a2a 50%, #121212 100%);
+    color: #e5e5e5;
+}
+
+/* 🔲 Main Layout */
+main {
+    flex-grow: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* Slightly increased gap for more breathing room */
+    text-align: center;
+}
+
+
+/* 🔘 Button Style - ALL BLACK & ADVANCED ANIMATIONS */
+button {
+    background-color: #000; /* Solid Black */
+    color: white;
+    border: 2px solid transparent; /* Added border for animation */
+    border-radius: 8px;
+    padding: 0.9rem 1.6rem; /* Increased padding */
+    font-size: 1.05rem; /* Slightly larger text */
+    margin: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deeper initial shadow */
+    transform: perspective(1px) translateZ(0); /* Improve rendering performance */
+}
+
+button:hover {
+    background-color: #1a1a1a; /* Darker on hover, not pure black */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+    transform: translateY(-3px); /* Stronger lift effect */
+    border-color: #007bff; /* Blue border glow */
+}
+
+button:active {
+    background-color: #333; /* Even darker on active */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(0); /* Return to original Y on press */
+}
+
+
+/* 🧮 Counter Circle Button - More Advanced */
+#tapButton {
+    width: 200px; /* Slightly larger */
+    height: 200px;
+    font-size: 2.2rem; /* Larger text */
+    font-weight: bold;
+    border-radius: 50%;
+    border: 5px solid transparent; /* Border for glowing effect */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); /* Radial gradient for depth */
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.6); /* Initial blue glow */
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    position: relative;
+    overflow: hidden;
+    animation: pulseGlow 3s infinite alternate; /* Continuous subtle glow */
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 30px rgba(0, 191, 255, 0.6), 0 0 15px rgba(0, 191, 255, 0.3) inset;
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 40px rgba(0, 191, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.4) inset;
+        transform: scale(1.02);
+    }
+}
+
+#tapButton:hover {
+    transform: scale(1.04); /* More pronounced grow */
+    box-shadow: 0 0 50px rgba(0, 191, 255, 1), 0 0 25px rgba(0, 191, 255, 0.5) inset; /* Stronger glow on hover */
+    border-color: #007bff; /* Solid border color on hover */
+}
+
+#tapButton:active {
+    transform: scale(0.98); /* Slight press */
+    background: radial-gradient(circle at center, #000 0%, #1a1a1a 100%); /* Invert gradient on press */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4), 0 0 10px rgba(0, 191, 255, 0.2) inset;
+}
+
+/* 🔵 Bubble Effect (created by JS, styled here) */
+.bubble {
+    position: absolute;
+    width: 60px; /* Slightly larger bubble */
+    height: 60px;
+    background: rgba(255, 255, 255, 0.7); /* Slightly brighter */
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Centers the bubble on its origin */
+    animation: fadeOutScale 0.8s forwards; /* Faster fade out */
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+@keyframes fadeOutScale {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2); /* Scales out more */
+    }
+}
+
+
+
+/* 🧭 Header + Nav */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem; /* More padding */
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle header background */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body.dark header {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.02);
+}
+
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* More space between nav buttons */
+}
+
+
+    .glow-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        text-shadow: 0 0 3px #111, /* soft dark halo */ 0 0 6px #222, /* medium */ 0 0 10px #000, /* strong black glow */ 0 0 20px #ffffff;
+        animation: blackGlowPulse 3s ease-in-out infinite;
+        margin-bottom: 0.5rem;
+    }
+
+    @keyframes blackGlowPulse {
+        0%, 100% {
+            text-shadow: 0 0 3px #ffffff,
+            0 0 6px #222,
+            0 0 10px #000,
+            0 0 20px #3c3939;
+        }
+        50% {
+            text-shadow: 0 0 6px #000,
+            0 0 10px #ffffff,
+            0 0 20px #333232,
+            0 0 30px #111;
+        }
+    }
+
+
+    .circle-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-top: clamp(0.5rem, 2vh, 2rem);
+    }
+
+    /* 🔁 Animated glowing ring around the button */
+    .circle-ring {
+        position: absolute;
+        top: -12px;
+        left: -12px;
+        right: -12px;
+        bottom: -12px;
+        border-radius: 50%;
+        border: 3px solid #00f2ff;
+        box-shadow: 0 0 20px #00f2ff;
+        animation: spinGlow 2s linear infinite;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* 🌀 Spin + glow effect */
+    @keyframes spinGlow {
+        0% {
+            transform: rotate(0deg);
+            box-shadow: 0 0 8px #000;
+        }
+        50% {
+            box-shadow: 0 0 20px #00f2ff;
+        }
+        100% {
+            transform: rotate(360deg);
+            box-shadow: 0 0 8px #000;
+        }
+    }
+
+    /* 🟣 Main Prayer Button – Fixed Center Text */
+    .prayer-button {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+        border: none;
+        cursor: pointer;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+
+
+/* ------------------------- */
+/*   PLUS & MINUS BUTTONS    */
+/* ------------------------- */
+
+.counter-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.counter-btn {
+    width: 65px;
+    height: 65px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #5d54f0, #6f67ff);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Glass effect */
+    box-shadow:
+            0 4px 10px rgba(0, 0, 0, 0.5),
+            inset 0 2px 6px rgba(255, 255, 255, 0.15);
+
+    transition: all 0.2s ease;
+}
+
+/* Hover + Press effects */
+.counter-btn:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 8px 15px rgba(0, 0, 0, 0.6),
+            inset 0 2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.counter-btn:active {
+    transform: scale(0.95);
+    box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.4),
+            inset 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------- */
+/*   RESPONSIVE BEHAVIOR    */
+/* ------------------------- */
+
+/* Tablets */
+@media (max-width: 900px) {
+    .counter-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        border-radius: 12px;
+    }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+    .counter-controls {
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .counter-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 26px;
+        border-radius: 10px;
+    }
+}
+
+.adjust-container {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.current-display {
+    font-size: 2.5rem;
+    margin: 10px auto;
+    padding: 10px;
+    color: #fff;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+    .adjust-btn {
+        width: 60px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+
+    #adjustInput {
+        width: 90px;
+        font-size: 1.4rem;
+    }
+}
+
+/* FIX FOR RING BLOCKING BUTTON CLICKS */
+.circle-ring {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+.counter-controls,
+.counter-btn {
+    position: relative;
+    z-index: 9999 !important;
+}
+
+
+button i {
+    margin-right: 6px;
+}
+
+
+/* ===============================
+   PROFILE GREETING
+================================ */
+
+.profile-greeting {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+    animation: fadeSlideIn 1.2s ease forwards;
+}
+
+.avatar {
+    font-size: 2.8rem;
+    color: #bfa8ff;
+    animation: pulseGlow 3s infinite ease-in-out;
+}
+
+.greeting-text {
+    text-align: left;
+}
+
+#greetingLine {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.quote {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* Animations */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        text-shadow: 0 0 8px rgba(150, 120, 255, 0.6);
+    }
+    50% {
+        text-shadow: 0 0 16px rgba(150, 120, 255, 1);
+    }
+}
+
+
+.nav button {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: inherit;
+}
+
+.nav button:hover i {
+    transform: scale(1.15);
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   FINAL MOBILE FIX — THE REAL ONE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    /* Kill desktop login centering */
+    body.login-body {
+        display: block !important;
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    /* Kill flex centering */
+    main {
+        display: block !important;
+        flex-grow: 0 !important;
+        min-height: auto !important;
+        padding-top: 0.5rem !important;
+    }
+
+    /* Remove fake vertical space */
+    .circle-wrapper {
+        margin-top: 0 !important;
+    }
+
+    /* Safety: footer stays natural */
+    footer,
+    .app-footer {
+        margin-top: 0 !important;
+    }
+}

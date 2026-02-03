@@ -1,0 +1,271 @@
+/* ==========================================================================
+   PRAY COUNTER - ADVANCED RESPONSIVE CSS
+   ========================================================================== */
+
+:root {
+    /* Color Palette - Matching your Glowing Icon theme */
+    --bg-dark: #0b0b0d;        /* Deep Navy/Black */
+    --card-bg: #16161a;        /* Elevated surface */
+    --primary-accent: #8e84f4;  /* Glowing Violet/Purple */
+    --secondary-accent: #4fd1ed;/* Cyan pulse color */
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --input-bg: #1f1f23;
+    --header-bg: #121215;
+
+    /* Effects */
+    --glass: rgba(255, 255, 255, 0.03);
+    --glow: 0 0 20px rgba(142, 132, 244, 0.3);
+    --smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode Logic (Applied via theme.js) */
+body.light {
+    --bg-dark: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-dim: #64748b;
+    --input-bg: #f8fafc;
+    --header-bg: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Mobile optimization */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    transition: var(--smooth);
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.app-header {
+    background-color: var(--header-bg);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--glass);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.app-header h2 {
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.nav button {
+    background: var(--input-bg);
+    border: 1px solid var(--glass);
+    color: var(--text-main);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--smooth);
+}
+
+.nav button:hover {
+    border-color: var(--primary-accent);
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.settings-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.settings-card {
+    background: var(--card-bg);
+    width: 100%;
+    padding: 3rem 2rem;
+    border-radius: 32px;
+    text-align: center;
+    border: 1px solid var(--glass);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.6s ease-out;
+}
+
+/* Desktop Version: Limit width */
+@media (min-width: 768px) {
+    .settings-card {
+        max-width: 450px;
+    }
+}
+
+/* Mobile Version: More edge-to-edge padding */
+@media (max-width: 480px) {
+    .settings-main {
+        padding: 1rem;
+    }
+    .settings-card {
+        padding: 2.5rem 1.5rem;
+        border-radius: 24px;
+    }
+}
+
+/* ===== COMPONENTS ===== */
+.settings-avatar {
+    font-size: 4.5rem;
+    color: var(--primary-accent);
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px rgba(142, 132, 244, 0.4));
+}
+
+.settings-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    color: var(--text-dim);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.input-group i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-accent);
+    font-size: 1.2rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 18px 16px 50px;
+    background: var(--input-bg);
+    border: 1px solid var(--glass);
+    border-radius: 16px;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--smooth);
+}
+
+.input-group input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 4px rgba(142, 132, 244, 0.1);
+}
+
+.save-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary-accent), #6d61e8);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--smooth);
+    box-shadow: 0 10px 20px rgba(109, 97, 232, 0.3);
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(109, 97, 232, 0.4);
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.save-status {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    height: 1.2rem;
+    transition: var(--smooth);
+}
+
+/* Vibration Slider Styling */
+.vibe-settings-container {
+    width: 100%;
+    margin: 1.5rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vibe-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.vibe-label i {
+    color: var(--accent-primary);
+}
+
+.slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#vibeIntensity {
+    flex-grow: 1;
+    height: 6px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    accent-color: var(--accent-primary); /* Matches your purple theme */
+    cursor: pointer;
+}
+
+#vibeValue {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: var(--accent-secondary);
+    min-width: 50px;
+    text-align: right;
+}
+
+/* Light mode adjustments */
+body.light .vibe-settings-container {
+    border-top-color: rgba(0, 0, 0, 0.05);
+}
+body.light #vibeIntensity {
+    background: #e2e8f0;
+}

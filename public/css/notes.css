@@ -1,0 +1,315 @@
+/* ==========================================================================
+   PRAYER NOTES - ELITE DYNAMIC UI (FULL)
+   ========================================================================== */
+
+:root {
+    --accent-purple: #a280ff;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --bg-dark: #0b0e14;
+    --bg-light: #f5f5f7;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== BASE BODY (LIGHT MODE BY DEFAULT) ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background: var(--bg-light);
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
+}
+
+/* ===== DYNAMIC BACKGROUND BLOB ===== */
+body::before {
+    content: "";
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(circle, rgba(162, 128, 255, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    animation: drift 15s infinite alternate ease-in-out;
+    opacity: 0; /* Hidden in light mode */
+    transition: opacity 0.5s ease;
+}
+
+body.dark::before {
+    opacity: 1; /* Visible in dark mode */
+}
+
+@keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(100vw, 50vh); }
+}
+
+/* ===== HEADER ===== */
+.notes-header {
+    padding: 60px 20px 30px;
+    text-align: center;
+}
+
+.notes-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(to bottom, #333, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: background 0.3s ease;
+}
+
+body.dark .notes-header h1 {
+    background: linear-gradient(to bottom, #ffffff, #a280ff);
+    -webkit-background-clip: text;
+}
+
+/* Navigation & Button Styling */
+.nav, .notes-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav button, .notes-actions button {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    color: #333;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav button:hover, .notes-actions button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== MAIN NOTE AREA ===== */
+.notes-main {
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#noteArea {
+    width: 100%;
+    min-height: 400px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    padding: 40px;
+    color: #1a1a1a;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    outline: none;
+    resize: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+    animation: scaleUp 0.6s ease;
+}
+
+#noteArea:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 20px rgba(162, 128, 255, 0.1);
+}
+
+#charCounter {
+    align-self: flex-end;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.notes-actions {
+    margin-top: 40px;
+}
+
+.notes-actions button {
+    width: 65px;
+    height: 65px;
+    font-size: 28px;
+}
+
+#saveStatus {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #25d366;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* ===== DARK MODE OVERRIDES (Applied via theme.js) ===== */
+body.dark {
+    background: var(--bg-dark) !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark .nav button,
+body.dark .notes-actions button {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: #ffffff;
+}
+
+body.dark .nav button:hover,
+body.dark .notes-actions button:hover {
+    background: rgba(162, 128, 255, 0.1);
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 20px rgba(162, 128, 255, 0.3);
+}
+
+body.dark #noteArea {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: #ffffff !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark #noteArea:focus {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(162, 128, 255, 0.4) !important;
+}
+
+body.dark #charCounter {
+    color: var(--accent-purple);
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.98) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes pulseMic {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== DICTATION ACTIVE STATE ===== */
+#dictationBtn.listening {
+    background: rgba(255, 68, 68, 0.2) !important;
+    border-color: #ff4444 !important;
+    color: #ff4444 !important;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.4) !important;
+    animation: pulseMic 1.5s infinite;
+}
+
+/* Copy success feedback */
+.copy-success {
+    border-color: #25d366 !important;
+    color: #25d366 !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .notes-header h1 { font-size: 1.8rem; }
+    #noteArea { padding: 25px; min-height: 350px; font-size: 1.1rem; }
+    .nav button, .notes-actions button { width: 48px; height: 48px; }
+}
+
+
+/* ==========================================================================
+   ADVANCED LANGUAGE SELECTOR STYLING
+   ========================================================================== */
+
+.theme-select {
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: #ffffff;
+    border-radius: 16px; /* Matching your button roundness */
+    padding: 0 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; /* Larger icons for visibility */
+    cursor: pointer;
+    outline: none;
+    height: 52px;
+    min-width: 70px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(15px);
+
+    /* Custom Arrow using a data-uri SVG (Purple Accent) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a280ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 30px;
+}
+
+/* Dark Mode specific depth */
+body.dark .theme-select {
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.theme-select:hover {
+    border-color: var(--accent-purple);
+    background-color: rgba(162, 128, 255, 0.05);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(162, 128, 255, 0.2);
+}
+
+.theme-select:focus {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 20px rgba(162, 128, 255, 0.3);
+}
+
+/* Styling the dropdown options list (limited styling possible for native select) */
+.theme-select option {
+    background-color: #1a1a1a; /* Dark background for the popup */
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* Alignment fix for the actions bar */
+#languageSelect {
+    height: 52px;
+    margin-right: -12px; /* Pulls it closer for a "grouped" look with the Mic */
+    z-index: 10;
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .theme-select {
+        height: 48px;
+        font-size: 16px;
+        min-width: 60px;
+    }
+}

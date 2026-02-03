@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tap Counter</title>
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styl.css">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+</head>
+
+<body class="light">
+
+<!-- ================= HEADER ================= -->
+<header class="app-header">
+
+    <h2 class="glow-title">Tap to Tranquility 📿</h2>
+
+    <div class="nav">
+
+        <button onclick="goToNotes()" title="Prayer Notes">
+            <i class="bi bi-journal-text"></i>
+        </button>
+
+        <button onclick="goToAllNotes()" title="View All Notes">
+            <i class="bi bi-list-ul"></i>
+        </button>
+
+        <button id="themeToggle" title="Toggle Light / Dark Mode">
+            <i id="themeIcon" class="bi bi-moon-stars"></i>
+        </button>
+
+        <button onclick="goToSettings()" title="Profile Settings">
+            <i class="bi bi-gear"></i>
+        </button>
+
+        <button onclick="location.href='inbox.html'">
+            <i class="bi bi-chat-dots"></i>
+        </button>
+
+        <button onclick="signOut()" title="Sign Out">
+            <i class="bi bi-box-arrow-right"></i>
+        </button>
+
+    </div>
+
+    <!-- GREETING -->
+    <div class="profile-greeting">
+        <i class="bi bi-person-circle avatar"></i>
+
+        <div class="greeting-text">
+            <p id="greetingLine"></p>
+            <p id="spiritualQuote" class="quote"></p>
+        </div>
+    </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+
+    <!-- COUNTER -->
+    <div class="circle-wrapper">
+        <div class="circle-ring" id="glowRing"></div>
+        <button class="prayer-button" id="tapButton">Prayers</button>
+    </div>
+
+    <h2>Taps: <span id="tap-count">0</span></h2>
+
+    <div class="counter-controls">
+        <button id="minusBtn" class="counter-btn">
+            -
+        </button>
+        <button id="plusBtn" class="counter-btn">
+            +
+        </button>
+    </div>
+
+    <div id="bubbleContainer"></div>
+
+</main>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script src="js/firebase/firebase-init.js"></script>
+<script src="js/ap.js"></script>
+<script src="js/theme.js"></script>
+
+<script>
+    function goToSettings() {
+        window.location.href = "settings.html";
+    }
+
+    function goToAllNotes() {
+        window.location.href = "all-notes.html";
+    }
+</script>
+
+</body>
+</html>

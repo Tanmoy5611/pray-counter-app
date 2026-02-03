@@ -1,0 +1,281 @@
+/* ==========================================================================
+   ADVANCED LOGIN UI - DYNAMIC & NEUMORPHIC GLASS
+   ========================================================================== */
+
+/* Global Reset & Box Sizing */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 1. Page & Background Setup */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0f0f12; /* Deep space black */
+    overflow: hidden;
+    position: relative;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Moving ambient light behind the card */
+.animated-bg {
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(93, 84, 240, 0.1) 0%, transparent 40%);
+    animation: drift 15s linear infinite;
+    z-index: -1;
+}
+
+@keyframes drift {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 2. The Glass Container */
+.login-container {
+    width: 90%;
+    max-width: 420px;
+    padding: 3rem 2.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 32px; /* Smooth rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 10;
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Header Styling */
+.login-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.brand-icon {
+    font-size: 2rem;
+    color: #bfa8ff;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 15px rgba(191, 168, 255, 0.4));
+}
+
+.login-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    opacity: 0.6;
+}
+
+/* 4. Advanced Floating Input Groups - FIXED SHAPE & VISIBILITY */
+.input-group {
+    margin-bottom: 1.8rem;
+    width: 100%;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px; /* Nicely shaped/rounded */
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.input-wrapper:focus-within {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(191, 168, 255, 0.5);
+    box-shadow: 0 0 20px rgba(191, 168, 255, 0.1);
+}
+
+/* Icons within Input - Visibility Fixed */
+.leading-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.3s ease;
+    z-index: 5;
+}
+
+.input-wrapper:focus-within .leading-icon {
+    color: #bfa8ff;
+}
+
+/* Input text fixes (Transparency & Overflow) */
+.input-wrapper input {
+    width: 100%;
+    height: 100%;
+    background: transparent !important; /* Prevents white rectangular blocks */
+    border: none;
+    outline: none;
+    padding: 22px 50px 0 55px;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+/* Autofill Hack - Prevents browser from making inputs white */
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-wrapper label {
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+}
+
+.input-wrapper input:focus ~ label,
+.input-wrapper input:not(:placeholder-shown) ~ label {
+    top: 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #bfa8ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+    z-index: 5;
+}
+
+.toggle-eye:hover { color: #fff; }
+
+/* 5. Buttons & Actions */
+.login-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.primary-btn {
+    width: 100%;
+    height: 55px;
+    background: linear-gradient(135deg, #6e5af7 0%, #bfa8ff 100%);
+    border: none;
+    border-radius: 18px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(110, 90, 247, 0.3);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(110, 90, 247, 0.5);
+}
+
+.secondary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.icon-btn-adv {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 6. Footer Layout */
+.login-footer {
+    position: fixed;
+    bottom: 2rem;
+    text-align: center;
+    width: 100%;
+    opacity: 0.5;
+    color: #fff;
+}
+
+/* 7. Light Theme Adjustments - FIXED CONTRAST */
+body.light {
+    background: #f4f4f9;
+}
+
+body.light .login-container {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    color: #2d2d2d;
+}
+
+body.light .input-wrapper {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light .input-wrapper input {
+    color: #222 !important;
+}
+
+body.light .input-wrapper input:-webkit-autofill {
+    -webkit-text-fill-color: #222 !important;
+}
+
+/* Fixed icon visibility in Light Mode */
+body.light .leading-icon,
+body.light .toggle-eye,
+body.light .icon-btn-adv,
+body.light .input-wrapper label {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+body.light .login-header h2 {
+    color: #1a1a1a;
+}
+
+body.light .subtitle,
+body.light .login-footer {
+    color: #444;
+}

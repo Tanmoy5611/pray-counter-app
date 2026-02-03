@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Prayer Notes</title>
+
+    <!-- Bootstrap Icons ONLY -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+            rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/all-notes.css">
+</head>
+
+<body class="light">
+
+<!-- ================= HEADER ================= -->
+<header class="notes-header">
+    <h1>
+        <i class="bi bi-journal-text"></i>
+        All Prayer Notes
+    </h1>
+
+    <div class="nav">
+        <button
+                class="icon-btn"
+                onclick="goBack()"
+                title="Back"
+        >
+            <i class="bi bi-arrow-left"></i>
+        </button>
+
+        <button onclick="goToCounter()" title="Back to Counter">
+            <i class="bi bi-house-heart-fill"></i>
+        </button>
+
+        <button id="themeToggle" title="Toggle Light / Dark Mode">
+            <i id="themeIcon" class="bi bi-moon-stars"></i>
+        </button>
+
+        <button onclick="location.href='inbox.html'">
+            <i class="bi bi-chat-dots"></i>
+        </button>
+
+        <button onclick="signOut()" title="Sign Out">
+            <i class="bi bi-box-arrow-right"></i>
+        </button>
+    </div>
+
+</header>
+
+<!-- ================= TOOLBAR ================= -->
+<section class="notes-toolbar">
+
+    <!-- Search -->
+    <div class="toolbar-group search-group">
+        <button
+                class="icon-btn"
+                onclick="focusSearch()"
+                title="Search notes"
+        >
+            <i class="bi bi-search"></i>
+        </button>
+
+        <input
+                type="text"
+                id="searchInput"
+                placeholder="Search notes..."
+        >
+    </div>
+
+    <!-- Sort -->
+    <div class="toolbar-group">
+        <button
+                class="icon-btn"
+                onclick="sortNewest()"
+                title="Sort by newest"
+        >
+            <i class="bi bi-sort-down"></i>
+        </button>
+
+        <button
+                class="icon-btn"
+                onclick="sortOldest()"
+                title="Sort by oldest"
+        >
+            <i class="bi bi-sort-up"></i>
+        </button>
+    </div>
+
+    <!-- Export -->
+    <div class="toolbar-group">
+        <button
+                class="icon-btn"
+                onclick="exportNotes()"
+                title="Export notes"
+        >
+            <i class="bi bi-box-arrow-up"></i>
+        </button>
+    </div>
+
+</section>
+
+<!-- ================= MAIN ================= -->
+<main class="notes-main">
+
+    <!-- NOTES LIST -->
+    <div id="notesList" class="notes-list">
+        <!-- Notes injected by all-notes.js -->
+    </div>
+
+</main>
+
+<!-- ================= FIREBASE ================= -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<!-- Firebase init -->
+<script src="js/firebase/firebase-init.js"></script>
+
+<!-- App script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/notes/all-notes.js"></script>
+<script src="js/theme.js"></script>
+
+<script>
+    function goToCounter() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>

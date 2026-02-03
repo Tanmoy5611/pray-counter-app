@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat – Pray Counter</title>
+
+    <!-- IMPORTANT: viewport-fit=cover for mobile keyboards -->
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no,
+                   viewport-fit=cover">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/chat.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="js/firebase/firebase-init.js"></script>
+</head>
+
+<body class="chat-page">
+
+<!-- ================= HEADER ================= -->
+<header class="chat-header">
+    <div class="chat-info">
+        <div id="chatHeader">Chat</div>
+        <div id="typingStatus"></div>
+    </div>
+
+    <div class="header-actions">
+        <button onclick="location.href='index.html'" title="Home">
+            <i class="bi bi-house-heart-fill"></i>
+        </button>
+
+        <button onclick="location.href='inbox.html'" title="Inbox">
+            <i class="bi bi-chat-dots"></i>
+        </button>
+
+        <button id="themeToggle" title="Theme">
+            <i id="themeIcon" class="bi bi-moon-stars"></i>
+        </button>
+
+        <button onclick="location.href='notes.html'" title="Notes">
+            <i class="bi bi-journal-text"></i>
+        </button>
+
+        <button onclick="location.href='all-notes.html'" title="All Notes">
+            <i class="bi bi-list-ul"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ================= CHAT BODY ================= -->
+<main class="chat-main">
+
+    <!-- Messages (scrollable area) -->
+    <section id="messages" class="chat-messages"></section>
+
+    <!-- Scroll to bottom -->
+    <button id="scrollToBottom" class="scroll-btn" aria-label="Scroll to bottom">
+        <i class="bi bi-chevron-down"></i>
+    </button>
+
+</main>
+
+<!-- ================= INPUT BAR (FIXED) ================= -->
+<footer class="chat-footer">
+    <div class="input-wrapper">
+        <input
+                id="messageInput"
+                type="text"
+                placeholder="Type a message…"
+                autocomplete="off"
+        >
+
+        <button id="sendBtn" aria-label="Send">
+            <i class="bi bi-send-fill"></i>
+        </button>
+    </div>
+</footer>
+
+<!-- ================= LOGIC ================= -->
+<script src="js/chats/cha.js"></script>
+<script src="js/theme.js"></script>
+
+<!-- ================= MOBILE KEYBOARD FIX ================= -->
+<script>
+    (function () {
+        const messages = document.getElementById("messages");
+        const footer = document.querySelector(".chat-footer");
+
+        function adjustForKeyboard() {
+            if (!window.visualViewport) return;
+
+            const vh = window.visualViewport.height;
+            document.documentElement.style.setProperty("--vh", vh + "px");
+
+            // Keep last message visible
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener("resize", adjustForKeyboard);
+            window.visualViewport.addEventListener("scroll", adjustForKeyboard);
+        }
+
+        // Initial call
+        adjustForKeyboard();
+    })();
+</script>
+
+</body>
+</html>

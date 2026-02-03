@@ -1,0 +1,668 @@
+/* ==========================================================================
+   PRAY COUNTER - ULTRA-ADVANCED RESPONSIVE STYLESHEET
+   Target: Mobile (1st Priority) & Desktop (High-End Rendering)
+   Theme: Spiritual Technology / Minimalist Glow
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ROOT VARIABLES & THEME ENGINE
+   -------------------------------------------------------------------------- */
+:root {
+    /* Core Branding Colors (Derived from your Prayer Beads Icon) */
+    --accent-primary: #8e84f4;    /* Glowing Purple */
+    --accent-secondary: #4fd1ed;  /* Cyan Pulse */
+    --accent-success: #4ade80;    /* Save Confirmation */
+
+    /* Animation Timings */
+    --anim-slow: 0.8s;
+    --anim-med: 0.4s;
+    --anim-fast: 0.2s;
+
+    /* Shadows & Glows */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    --glow-blue: 0 0 20px rgba(79, 209, 237, 0.4);
+    --glow-purple: 0 0 20px rgba(142, 132, 244, 0.4);
+
+    /* Responsive Spacing */
+    --space-mobile: 1.5rem;
+    --space-desktop: 3rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & SCROLLBAR
+   -------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Advanced Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(142, 132, 244, 0.3);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* --------------------------------------------------------------------------
+   3. DYNAMIC BODY & BACKGROUNDS
+   -------------------------------------------------------------------------- */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    transition: background var(--anim-slow) ease-in-out, color var(--anim-slow) ease-in-out;
+    background-size: 300% 300%;
+    animation: backgroundShift 20s ease infinite alternate;
+}
+
+@keyframes backgroundShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🌞 Light Theme Context */
+body.light {
+    background-color: #f8f9fa;
+    background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    color: #1e293b;
+}
+
+/* 🌙 Dark Theme Context */
+body.dark {
+    background-color: #0b0b0d;
+    background-image: linear-gradient(135deg, #0b0b0d 0%, #1a1a1c 50%, #0b0b0d 100%);
+    color: #f8fafc;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & NAV (GLASSMORPHISM)
+   -------------------------------------------------------------------------- */
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+body.dark header {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.glow-title {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    color: #fff;
+    animation: blackGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes blackGlowPulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.1), 0 0 30px #000; }
+    50% { text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 50px #000; }
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.nav button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: inherit;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--smooth);
+}
+
+.nav button:hover {
+    background: var(--accent-primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. MAIN CONTENT ENGINE
+   -------------------------------------------------------------------------- */
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+
+/* ===============================
+   PRAYER BUTTON CORE RESET
+================================ */
+
+.circle-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: clamp(0.5rem, 2vh, 2rem);
+}
+
+/* ===============================
+   OUTER GLOWING RING
+================================ */
+
+.circle-ring {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border-radius: 50%;
+    border: 3px solid #00f2ff;
+    box-shadow: 0 0 20px #00f2ff;
+    animation: spinGlow 2s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Spin + glow animation */
+@keyframes spinGlow {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: 0 0 8px #000;
+    }
+    50% {
+        box-shadow: 0 0 20px #00f2ff;
+    }
+    100% {
+        transform: rotate(360deg);
+        box-shadow: 0 0 8px #000;
+    }
+}
+
+/* ===============================
+   MAIN PRAYER BUTTON
+================================ */
+
+.prayer-button,
+#tapButton {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    color: white;
+
+    font-weight: bold;
+    font-size: 2.2rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+            0 0 30px rgba(0, 191, 255, 0.6),
+            inset 0 0 15px rgba(0, 191, 255, 0.3);
+
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: pulseGlow 3s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes pulseGlow {
+     0% {
+         box-shadow:
+                 0 0 26px rgba(0, 191, 255, 0.32),   /* inner glow */
+                 0 0 42px rgba(0, 191, 255, 0.22),   /* mid glow */
+                 0 0 64px rgba(0, 191, 255, 0.12),   /* outer ambient (NEW) */
+                 inset 0 0 20px rgba(0, 191, 255, 0.22); /* inner depth */
+         transform: scale(0.995);
+     }
+
+     50% {
+         box-shadow:
+                 0 0 48px rgba(0, 191, 255, 0.95),   /* inner glow */
+                 0 0 72px rgba(0, 191, 255, 0.6),    /* mid glow */
+                 0 0 100px rgba(0, 191, 255, 0.35),  /* outer ambient (NEW) */
+                 inset 0 0 38px rgba(0, 191, 255, 0.55); /* inner depth */
+         transform: scale(1.035);
+     }
+
+     100% {
+         box-shadow:
+                 0 0 26px rgba(0, 191, 255, 0.32),
+                 0 0 42px rgba(0, 191, 255, 0.22),
+                 0 0 64px rgba(0, 191, 255, 0.12),
+                 inset 0 0 20px rgba(0, 191, 255, 0.22);
+         transform: scale(0.995);
+     }
+ }
+
+
+/* Hover interaction */
+.prayer-button:hover,
+#tapButton:hover {
+    transform: scale(1.04);
+    box-shadow:
+            0 0 50px rgba(0, 191, 255, 1),
+            inset 0 0 25px rgba(0, 191, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Active press */
+.prayer-button:active,
+#tapButton:active {
+    transform: scale(0.98);
+    background: radial-gradient(circle at center, #000 0%, #1a1a1a 100%);
+    box-shadow:
+            0 0 15px rgba(0, 191, 255, 0.4),
+            inset 0 0 10px rgba(0, 191, 255, 0.2);
+}
+
+/* ===============================
+   INNER BLUE RING (HOVER)
+================================ */
+
+.prayer-button::before,
+#tapButton::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 4px solid #3b82f6;
+
+    box-shadow:
+            0 0 12px rgba(59, 130, 246, 0.9),
+            0 0 24px rgba(59, 130, 246, 0.6);
+
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Show inner ring on hover */
+.prayer-button:hover::before,
+#tapButton:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===============================
+   BUBBLE TAP EFFECT
+================================ */
+
+.bubble {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeOutScale 0.8s forwards;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@keyframes fadeOutScale {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+/* ===============================
+   CLICK SAFETY FIX
+================================ */
+
+.circle-ring {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. COUNTER CONTROLS (+ / -)
+   -------------------------------------------------------------------------- */
+.counter-controls {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    z-index: 10;
+}
+
+.counter-btn {
+    width: 68px;
+    height: 68px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(145deg, var(--accent-primary), #6366f1);
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    transition: var(--smooth);
+}
+
+.counter-btn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+}
+
+.counter-btn:active {
+    transform: scale(0.9);
+}
+
+/* --------------------------------------------------------------------------
+   8. SETTINGS & PROFILE CARDS
+   -------------------------------------------------------------------------- */
+.settings-card, .adjust-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.6s ease-out;
+}
+
+body.light .settings-card {
+    background: #fff;
+    box-shadow: var(--shadow-lg);
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Avatar & Greeting Section */
+.profile-greeting {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(142, 132, 244, 0.05);
+    padding: 1.2rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.avatar {
+    font-size: 3rem;
+    color: var(--accent-primary);
+    filter: drop-shadow(var(--glow-purple));
+}
+
+.greeting-text h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.quote {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   9. FORMS & INPUTS
+   -------------------------------------------------------------------------- */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-primary);
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+body.light input {
+    background: #f1f5f9;
+    color: #000;
+    border-color: #e2e8f0;
+}
+
+input:focus {
+    border-color: var(--accent-primary);
+}
+
+/* --------------------------------------------------------------------------
+   10. THE BUBBLE PARTICLE ENGINE
+   -------------------------------------------------------------------------- */
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100;
+    animation: bubblePop 0.7s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes bubblePop {
+    0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   11. FOOTER STYLING
+   -------------------------------------------------------------------------- */
+footer {
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   12. MOBILE OPTIMIZATIONS (HIGH PRIORITY)
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    main {
+        padding: 1.5rem;
+        gap: 1.8rem;
+        justify-content: flex-start;
+        padding-top: 2rem;
+    }
+
+    .glow-title { font-size: 2rem; }
+
+    #tapButton, .prayer-button {
+        width: 190px;
+        height: 190px;
+        font-size: 1.3rem;
+    }
+
+    .counter-btn {
+        width: 58px;
+        height: 58px;
+        font-size: 1.6rem;
+    }
+
+    .profile-greeting {
+        padding: 1rem;
+        margin-top: 0;
+    }
+
+    .settings-card {
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    /* Fix for small height screens */
+    @media (max-height: 700px) {
+        .circle-wrapper { margin: 0.5rem 0; }
+        .glow-title { margin-bottom: 0.2rem; }
+    }
+}
+
+/* --------------------------------------------------------------------------
+   13. DESKTOP REFINEMENTS
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .settings-main {
+        flex-direction: row;
+        gap: 5rem;
+    }
+
+    .prayer-button:hover {
+        letter-spacing: 4px; /* Dynamic text expansion */
+    }
+
+    .nav button:hover i {
+        animation: iconBounce 0.5s ease infinite alternate;
+    }
+}
+
+@keyframes iconBounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+/* --------------------------------------------------------------------------
+   14. UTILITY CLASSES (FOR JS INTEGRATION)
+   -------------------------------------------------------------------------- */
+.hidden { display: none !important; }
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-bg {
+    background: var(--accent-success) !important;
+    box-shadow: 0 0 20px var(--accent-success) !important;
+}
+
+.save-status.visible {
+    animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Final line to ensure vertical breathing room */
+.app-footer-spacer { height: 50px; width: 100%; }
+
+
+
+    /* ===============================
+       FIXES & OPTIMIZATIONS PATCH
+       =============================== */
+
+:root {
+    /* Fixes the flickering nav buttons by defining the missing variable */
+    --smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.circle-wrapper {
+    /* Fixes glow clipping: ensures the 100px glow has room to breathe on mobile */
+    padding: 40px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#tapButton, .prayer-button {
+    /* Fixes internal glow: makes center semi-transparent so ring light bleeds through */
+    background: radial-gradient(circle at center, rgba(26, 26, 26, 0.7) 0%, rgba(0, 0, 0, 0.95) 100%) !important;
+
+    /* Forces hardware acceleration for smoother mobile animation */
+    will-change: transform, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.circle-ring {
+    /* Ensures the ring stays perfectly centered behind the button */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 20px) !important;
+
+    /* Ensures the glow is visible on mobile safari */
+    -webkit-filter: blur(0px);
+}
+
+/* Fixes button size for very small phones (iPhone SE / Fold) */
+@media (max-width: 360px) {
+    #tapButton {
+        width: 160px !important;
+        height: 160px !important;
+        font-size: 1.8rem !important;
+    }
+}

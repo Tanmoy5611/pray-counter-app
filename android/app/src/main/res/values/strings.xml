@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Pray Counter</string>
+    <string name="title_activity_main">Pray Counter</string>
+    <string name="package_name">com.tanmoy.praycounter</string>
+    <string name="custom_url_scheme">com.tanmoy.praycounter</string>
+</resources>
