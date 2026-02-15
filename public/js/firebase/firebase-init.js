@@ -14,3 +14,18 @@ const firebaseConfig = {
 
 // Initialize Firebase once!
 firebase.initializeApp(firebaseConfig);
+
+/* =========================
+   OFFLINE SUPPORT
+   ========================= */
+
+// 1) Keep DB synced + cached locally (works in web + Android WebView)
+firebase.database().ref().keepSynced(true);
+
+// 2) Better offline caching in environments that support it
+try {
+    firebase.database().setPersistenceEnabled(true);
+} catch (e) {
+    // Some environments may not support this. Safe to ignore.
+    console.log("Persistence already enabled or not supported:", e?.message || e);
+}

@@ -155,243 +155,213 @@ body.dark header {
     transform: translateY(-2px);
 }
 
-
-
-
-/* ==========================================================================
-   PRAYER COUNTER - ULTRA-DYNAMIC V3 (INTERNAL GLOW EDITION)
-   Focus: High-Intensity Cyan Glow + Semi-Transparent Depth
-   ========================================================================== */
-
-:root {
-    /* Color Palette from your 2nd Image */
-    --glow-cyan: #00f2ff;
-    --glow-cyan-soft: rgba(0, 242, 255, 0.6);
-    --glow-cyan-ambient: rgba(0, 242, 255, 0.2);
-    --deep-black: #000000;
-    --inner-ring-blue: #3b82f6;
-
-    /* Animation Timings */
-    --speed-spin: 3s;
-    --speed-pulse: 2s;
-
-    /* Responsive Sizing */
-    --btn-size-mobile: 200px;
-    --btn-size-desktop: 260px;
-}
-
 /* --------------------------------------------------------------------------
-   1. CORE WRAPPER (MOBILE-FIRST)
+   5. MAIN CONTENT ENGINE
    -------------------------------------------------------------------------- */
-.circle-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Extra padding ensures the high-intensity glow isn't clipped on small screens */
-    padding: clamp(30px, 8vw, 60px);
-    margin: 0 auto;
-    perspective: 1000px;
-}
-
-/* --------------------------------------------------------------------------
-   2. THE OUTER RING - MULTI-LAYERED INTENSITY
-   -------------------------------------------------------------------------- */
-.circle-ring {
-    position: absolute;
-    /* Calculated to always stay outside the button radius */
-    width: calc(100% - 10px);
-    height: calc(100% - 10px);
-    border-radius: 50%;
-
-    /* The 2nd Pic Secret: Solid border + high diffusion shadow */
-    border: 3px solid var(--glow-cyan);
-    box-shadow:
-            0 0 20px var(--glow-cyan),        /* Sharp Inner Glow */
-            0 0 45px var(--glow-cyan-soft),   /* Medium Atmosphere */
-            0 0 90px var(--glow-cyan-ambient); /* Wide Screen Ambient */
-
-    animation: hyperSpin var(--speed-spin) linear infinite;
-    z-index: 0;
-    pointer-events: none;
-    will-change: transform, box-shadow;
-}
-
-@keyframes hyperSpin {
-    0% {
-        transform: rotate(0deg) scale(1);
-        filter: hue-rotate(0deg) brightness(1);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.05);
-        filter: hue-rotate(10deg) brightness(1.3);
-        box-shadow:
-                0 0 30px var(--glow-cyan),
-                0 0 60px var(--glow-cyan-soft),
-                0 0 120px var(--glow-cyan-ambient);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-        filter: hue-rotate(0deg) brightness(1);
-    }
-}
-
-/* --------------------------------------------------------------------------
-   3. THE MAIN BUTTON - THE "BOWL" DEPTH EFFECT
-   -------------------------------------------------------------------------- */
-.prayer-button,
-#tapButton {
-    position: relative;
-    width: var(--btn-size-mobile);
-    height: var(--btn-size-mobile);
-    border-radius: 50%;
-    border: none;
-
-    /* THE HOVER FIX:
-       We use a semi-transparent radial gradient (0.8 alpha).
-       This allows the outer ring's blue light to shine THROUGH the button,
-       creating that "Internal Glow" you saw in your 2nd picture.
-    */
-    background: radial-gradient(
-            circle at 50% 40%,
-            rgba(30, 30, 30, 0.75) 0%,
-            rgba(10, 10, 10, 0.9) 70%,
-            var(--deep-black) 100%
-    );
-
-    color: #ffffff;
-    font-weight: 900;
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    cursor: pointer;
-
+main {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /* Depth Shadows */
-    box-shadow:
-            0 20px 40px rgba(0,0,0,0.6),
-            inset 0 0 30px rgba(0, 242, 255, 0.05); /* Very subtle internal tint */
-
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 2;
-    overflow: hidden; /* Keeps the inner ring clipped */
+    padding: 2rem;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-/* --------------------------------------------------------------------------
-   4. INNER BLUE RING (STAYS VISIBLE)
-   -------------------------------------------------------------------------- */
+
+/* ===============================
+   PRAYER BUTTON CORE RESET
+================================ */
+
+.circle-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: clamp(0.5rem, 2vh, 2rem);
+}
+
+/* ===============================
+   OUTER GLOWING RING
+================================ */
+
+.circle-ring {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border-radius: 50%;
+    border: 3px solid #00f2ff;
+    box-shadow: 0 0 20px #00f2ff;
+    animation: spinGlow 2s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Spin + glow animation */
+@keyframes spinGlow {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: 0 0 8px #000;
+    }
+    50% {
+        box-shadow: 0 0 20px #00f2ff;
+    }
+    100% {
+        transform: rotate(360deg);
+        box-shadow: 0 0 8px #000;
+    }
+}
+
+/* ===============================
+   MAIN PRAYER BUTTON
+================================ */
+
+.prayer-button,
+#tapButton {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    color: white;
+
+    font-weight: bold;
+    font-size: 2.2rem;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+            0 0 30px rgba(0, 191, 255, 0.6),
+            inset 0 0 15px rgba(0, 191, 255, 0.3);
+
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    animation: pulseGlow 3s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes pulseGlow {
+     0% {
+         box-shadow:
+                 0 0 26px rgba(0, 191, 255, 0.32),   /* inner glow */
+                 0 0 42px rgba(0, 191, 255, 0.22),   /* mid glow */
+                 0 0 64px rgba(0, 191, 255, 0.12),   /* outer ambient (NEW) */
+                 inset 0 0 20px rgba(0, 191, 255, 0.22); /* inner depth */
+         transform: scale(0.995);
+     }
+
+     50% {
+         box-shadow:
+                 0 0 48px rgba(0, 191, 255, 0.95),   /* inner glow */
+                 0 0 72px rgba(0, 191, 255, 0.6),    /* mid glow */
+                 0 0 100px rgba(0, 191, 255, 0.35),  /* outer ambient (NEW) */
+                 inset 0 0 38px rgba(0, 191, 255, 0.55); /* inner depth */
+         transform: scale(1.035);
+     }
+
+     100% {
+         box-shadow:
+                 0 0 26px rgba(0, 191, 255, 0.32),
+                 0 0 42px rgba(0, 191, 255, 0.22),
+                 0 0 64px rgba(0, 191, 255, 0.12),
+                 inset 0 0 20px rgba(0, 191, 255, 0.22);
+         transform: scale(0.995);
+     }
+ }
+
+
+/* Hover interaction */
+.prayer-button:hover,
+#tapButton:hover {
+    transform: scale(1.04);
+    box-shadow:
+            0 0 50px rgba(0, 191, 255, 1),
+            inset 0 0 25px rgba(0, 191, 255, 0.5);
+    border-color: #007bff;
+}
+
+/* Active press */
+.prayer-button:active,
+#tapButton:active {
+    transform: scale(0.98);
+    background: radial-gradient(circle at center, #000 0%, #1a1a1a 100%);
+    box-shadow:
+            0 0 15px rgba(0, 191, 255, 0.4),
+            inset 0 0 10px rgba(0, 191, 255, 0.2);
+}
+
+/* ===============================
+   INNER BLUE RING (HOVER)
+================================ */
+
 .prayer-button::before,
 #tapButton::before {
     content: "";
     position: absolute;
-    /* Inset creates the 'inner' ring look */
-    inset: 12px;
+    inset: 14px;
     border-radius: 50%;
-    border: 4px solid var(--inner-ring-blue);
+    border: 4px solid #3b82f6;
 
     box-shadow:
-            0 0 15px rgba(59, 130, 246, 0.8),
-            inset 0 0 15px rgba(59, 130, 246, 0.4);
+            0 0 12px rgba(59, 130, 246, 0.9),
+            0 0 24px rgba(59, 130, 246, 0.6);
 
-    /* Start hidden but scaled up for a 'drop-in' effect */
     opacity: 0;
-    transform: scale(1.1);
-    transition: all 0.4s ease-out;
+    transform: scale(0.92);
+    transition: opacity 0.35s ease, transform 0.35s ease;
     pointer-events: none;
     z-index: 1;
 }
 
-/* --------------------------------------------------------------------------
-   5. DYNAMIC INTERACTIONS
-   -------------------------------------------------------------------------- */
-
-/* Hover State - Intensifies the Internal Glow */
-.prayer-button:hover,
-#tapButton:hover {
-    transform: scale(1.05) translateY(-5px);
-    background: radial-gradient(
-            circle at 50% 40%,
-            rgba(40, 40, 40, 0.6) 0%, /* Becomes more transparent on hover */
-            rgba(10, 10, 10, 0.8) 70%,
-            var(--deep-black) 100%
-    );
-    box-shadow: 0 30px 60px rgba(0, 242, 255, 0.2);
-}
-
-/* Inner Ring Toggle */
+/* Show inner ring on hover */
 .prayer-button:hover::before,
 #tapButton:hover::before {
     opacity: 1;
     transform: scale(1);
 }
 
-/* Active Press (Haptic Feel) */
-.prayer-button:active,
-#tapButton:active {
-    transform: scale(0.94) translateY(2px);
-    background: #000;
-    transition: all 0.1s ease;
-}
+/* ===============================
+   BUBBLE TAP EFFECT
+================================ */
 
-/* --------------------------------------------------------------------------
-   6. DESKTOP ADAPTATIONS
-   -------------------------------------------------------------------------- */
-@media (min-width: 1024px) {
-    #tapButton {
-        width: var(--btn-size-desktop);
-        height: var(--btn-size-desktop);
-    }
-
-    .circle-ring {
-        border-width: 4px; /* Thicker ring for larger screens */
-    }
-
-    .prayer-button:hover {
-        letter-spacing: 8px; /* Smooth text expansion */
-    }
-}
-
-/* --------------------------------------------------------------------------
-   7. BUBBLE PARTICLES (JS COMPATIBLE)
-   -------------------------------------------------------------------------- */
 .bubble {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, #fff 0%, rgba(0, 242, 255, 0.5) 40%, transparent 70%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeOutScale 0.8s forwards;
     pointer-events: none;
-    z-index: 9999;
-    animation: particleExplosion 0.8s ease-out forwards;
+    z-index: 1000;
 }
 
-@keyframes particleExplosion {
-    0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
-}
-
-/* --------------------------------------------------------------------------
-   8. UTILITY CLASSES & ACCESSIBILITY
-   -------------------------------------------------------------------------- */
-.glow-text {
-    text-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .circle-ring, .prayer-button {
-        animation: none !important;
-        transition: none !important;
+@keyframes fadeOutScale {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
     }
 }
 
+/* ===============================
+   CLICK SAFETY FIX
+================================ */
 
-
-
-
+.circle-ring {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
 
 /* --------------------------------------------------------------------------
    7. COUNTER CONTROLS (+ / -)
@@ -646,3 +616,53 @@ footer {
 
 /* Final line to ensure vertical breathing room */
 .app-footer-spacer { height: 50px; width: 100%; }
+
+
+
+    /* ===============================
+       FIXES & OPTIMIZATIONS PATCH
+       =============================== */
+
+:root {
+    /* Fixes the flickering nav buttons by defining the missing variable */
+    --smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.circle-wrapper {
+    /* Fixes glow clipping: ensures the 100px glow has room to breathe on mobile */
+    padding: 40px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#tapButton, .prayer-button {
+    /* Fixes internal glow: makes center semi-transparent so ring light bleeds through */
+    background: radial-gradient(circle at center, rgba(26, 26, 26, 0.7) 0%, rgba(0, 0, 0, 0.95) 100%) !important;
+
+    /* Forces hardware acceleration for smoother mobile animation */
+    will-change: transform, box-shadow;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.circle-ring {
+    /* Ensures the ring stays perfectly centered behind the button */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: calc(100% - 20px) !important;
+    height: calc(100% - 20px) !important;
+
+    /* Ensures the glow is visible on mobile safari */
+    -webkit-filter: blur(0px);
+}
+
+/* Fixes button size for very small phones (iPhone SE / Fold) */
+@media (max-width: 360px) {
+    #tapButton {
+        width: 160px !important;
+        height: 160px !important;
+        font-size: 1.8rem !important;
+    }
+}

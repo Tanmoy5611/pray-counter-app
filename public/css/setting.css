@@ -269,3 +269,62 @@ body.light .vibe-settings-container {
 body.light #vibeIntensity {
     background: #e2e8f0;
 }
+
+/* =========================
+   SETTINGS ITEM (NUMBER INPUT)
+========================= */
+.settings-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    height: 64px;
+    padding: 0 18px;
+
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.05);
+
+    box-sizing: border-box;
+}
+
+/* icon alignment */
+.settings-item i {
+    font-size: 1.25rem;
+    color: #8f8cff;
+    flex-shrink: 0;
+}
+
+/* number input – styled like text rows */
+.settings-item input[type="number"] {
+    flex: 1;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    font-weight: 500;
+
+    height: 100%;
+    padding: 0;
+
+    appearance: textfield; /* 🔥 removes default look */
+}
+
+/* remove arrows (Chrome, Edge, Safari) */
+.settings-item input[type="number"]::-webkit-inner-spin-button,
+.settings-item input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* remove arrows (Firefox) */
+.settings-item input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* placeholder tone */
+.settings-item input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}

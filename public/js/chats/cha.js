@@ -22,7 +22,7 @@ if (!otherUid) {
 
 // Utils
 const getChatId = (a, b) => [a, b].sort().join("_");
-const formatTime = ts => new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+const formatTime = ts => new Date(ts).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 
 // ======================================================================
 // AUTH & CORE LOGIC
@@ -37,8 +37,8 @@ auth.onAuthStateChanged(user => {
 
     // Online Status
     const meRef = db.ref(`users/${myUid}`);
-    meRef.update({ online: true });
-    meRef.onDisconnect().update({ online: false, lastSeen: Date.now() });
+    meRef.update({online: true});
+    meRef.onDisconnect().update({online: false, lastSeen: Date.now()});
 
     // Other User Presence & Info
     db.ref(`users/${otherUid}`).on("value", snap => {
@@ -50,27 +50,59 @@ auth.onAuthStateChanged(user => {
         if (!window.isOtherTyping) {
             if (u.online) {
                 typingStatus.textContent = "online";
+                typingStatus.style.color = "#25d366"; //  keep it green
             } else if (u.lastSeen) {
-                const mins = Math.max(1, Math.floor((Date.now() - u.lastSeen) / 60000));
-                typingStatus.textContent = `active ${mins} min ago`;
+                // UPDATED CALCULATION
+                const diffMs = Date.now() - u.lastSeen;
+                typingStatus.textContent = `active ${formatLastSeen(diffMs)} ago`;
+                typingStatus.style.color = ""; // Reset to default muted color
             }
         }
     });
 
+    // Helper to convert milliseconds to "1d 2h 3m" format
+    function formatLastSeen(ms) {
+        const totalMinutes = Math.floor(ms / 60000);
+        if (totalMinutes < 1) return "just now";
+
+        const d = Math.floor(totalMinutes / 1440);
+        const h = Math.floor((totalMinutes % 1440) / 60);
+        const m = totalMinutes % 60;
+
+        let result = "";
+        if (d > 0) result += `${d}d `;
+        if (h > 0) result += `${h}h `;
+        if (m > 0 || result === "") result += `${m}m`;
+
+        return result.trim();
+    }
+
     // Chat Members Setup
-    chatRef.child("members").update({ [myUid]: true, [otherUid]: true });
+    chatRef.child("members").update({[myUid]: true, [otherUid]: true});
 
     // Load Messages
     messagesRef.limitToLast(150).on("child_added", snap => {
         const msg = snap.val();
-        renderMessage(msg, myUid);
+        const msgId = snap.key;
+        renderMessage(msg, myUid, msgId); // Modified to pass msgId
 
         if (msg.to === myUid && !msg.read) {
-            snap.ref.update({ read: true });
+            snap.ref.update({read: true});
         }
 
         // Wait for DOM to paint before scrolling
         requestAnimationFrame(() => autoScroll());
+    });
+
+    //  Real-time UI Removal when a message is deleted
+    messagesRef.on("child_removed", snap => {
+        const deletedMsgId = snap.key;
+        const el = document.getElementById(`msg-${deletedMsgId}`);
+        if (el) {
+            el.style.opacity = "0";
+            el.style.transform = "scale(0.8)";
+            setTimeout(() => el.remove(), 300);
+        }
     });
 
     // Send Message Function
@@ -132,9 +164,11 @@ auth.onAuthStateChanged(user => {
 // ======================================================================
 // UI FUNCTIONS
 // ======================================================================
-function renderMessage(msg, myUid) {
+function renderMessage(msg, myUid, msgId) {
     const bubble = document.createElement("div");
     bubble.className = "bubble " + (msg.from === myUid ? "me" : "other");
+    bubble.id = `msg-${msgId}`; // Set ID for removal logic
+
     bubble.innerHTML = `
         <div class="message-text">${msg.text}</div>
         <div class="meta">
@@ -142,7 +176,64 @@ function renderMessage(msg, myUid) {
             ${msg.from === myUid ? `<span class="seen">${msg.read ? "✓✓" : "✓"}</span>` : ""}
         </div>
     `;
+
+    // Delete Logic (Right Click & Long Press)
+    if (msg.from === myUid) {
+        // Desktop: Right Click
+        bubble.oncontextmenu = (e) => {
+            e.preventDefault();
+            confirmDeleteMessage(msgId);
+        };
+
+        // Mobile: Long Press
+        let timer;
+        bubble.ontouchstart = () => {
+            timer = setTimeout(() => confirmDeleteMessage(msgId), 800);
+        };
+        bubble.ontouchend = () => clearTimeout(timer);
+        bubble.ontouchmove = () => clearTimeout(timer); // Cancel if scrolling
+    }
+
     messagesDiv.appendChild(bubble);
+}
+
+// Deletion Execution
+let messageToDeleteId = null; // Track which message to delete
+
+function confirmDeleteMessage(msgId) {
+    messageToDeleteId = msgId;
+    const modal = document.getElementById("deleteModal");
+
+    // 1. Provide haptic feedback via Android Bridge
+    if (window.AndroidApp && window.AndroidApp.vibrate) {
+        window.AndroidApp.vibrate(40);
+    }
+
+    // 2. Show the custom modal
+    modal.classList.add("show");
+
+    // 3. Set up the "Delete" button listener
+    const confirmBtn = document.getElementById("confirmDeleteBtn");
+    confirmBtn.onclick = () => {
+        const myUid = auth.currentUser.uid;
+        const chatId = getChatId(myUid, otherUid);
+
+        // Remove from Firebase
+        db.ref(`chats/${chatId}/messages/${messageToDeleteId}`).remove()
+            .then(() => {
+                closeDeleteModal();
+            })
+            .catch(err => {
+                console.error("Delete failed:", err);
+                closeDeleteModal();
+            });
+    };
+}
+
+function closeDeleteModal() {
+    const modal = document.getElementById("deleteModal");
+    modal.classList.remove("show");
+    messageToDeleteId = null;
 }
 
 function isNearBottom() {
@@ -165,8 +256,40 @@ messagesDiv.addEventListener("scroll", () => {
 });
 
 scrollBtn.addEventListener("click", () => {
-    messagesDiv.scrollTo({ top: messagesDiv.scrollHeight, behavior: "smooth" });
+    messagesDiv.scrollTo({top: messagesDiv.scrollHeight, behavior: "smooth"});
 });
+
+
+// ======================================================================
+// NOTIFICATIONS
+// ======================================================================
+const notificationChatRef = db.ref("chats");
+
+notificationChatRef.limitToLast(1).on("child_added", (snapshot) => {
+    // Note: currentUser needs to be defined from the auth listener or used from auth.currentUser
+    const message = snapshot.val();
+    const user = auth.currentUser;
+
+    if (user && message.senderId !== user.uid) {
+        showLocalNotification(message.senderName, message.text);
+    }
+});
+
+function showLocalNotification(name, text) {
+    if (Notification.permission === "granted") {
+        new Notification(`New Message from ${name}`, {
+            body: text,
+            icon: "assets/icons/icon-72.png"
+        });
+
+        // Bonus: Vibrate the phone when a message arrives!
+        if (window.AndroidApp && window.AndroidApp.vibrate) {
+            window.AndroidApp.vibrate(100);
+        }
+    } else {
+        Notification.requestPermission();
+    }
+}
 
 // ======================================================================
 // THE CRITICAL MOBILE KEYBOARD FIX

@@ -5,7 +5,7 @@
   <title>Profile Settings</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/setting.css">
 </head>
 
 <body class="light">
@@ -16,6 +16,10 @@
   <div class="nav">
     <button onclick="goBack()" title="Back">
       <i class="bi bi-house-heart-fill"></i>
+    </button>
+
+    <button onclick="location.href='counter.html'" title="Nam Jaap Mode">
+      <i class="bi bi-fingerprint"></i>
     </button>
 
     <button id="themeToggle" title="Toggle Light / Dark Mode">
@@ -41,6 +45,24 @@
               id="nameInput"
               placeholder="Enter your name"
       >
+    </div>
+
+    <div class="input-group">
+      <i class="bi bi-calculator"></i>
+      <input
+              type="number"
+              id="totalCountInput"
+              placeholder="Edit Total Pray Count"
+      >
+    </div>
+
+    <div class="input-group">
+      <i class="bi bi-fingerprint"></i> <input type="number" id="jaapCountInput" placeholder="Edit Your Count">
+    </div>
+
+    <div class="settings-item">
+      <i class="bi bi-arrow-repeat"></i>
+      <input type="number" id="loopGoalInput" placeholder="Beads per Loop (e.g. 108)">
     </div>
 
     <div class="vibe-settings-container">
@@ -76,7 +98,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script src="js/firebase/firebase-init.js"></script>
-<script src="js/settings/sett.js"></script>
+<script src="js/settings/setting.js"></script>
 
 <script>
 

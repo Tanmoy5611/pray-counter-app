@@ -145,6 +145,15 @@ function signOut() {
 }
 
 // ===============================
+//  ANDROID MIC PERMISSION (ADDED)
+// ===============================
+function requestAndroidMicPermission() {
+    if (window.AndroidApp && window.AndroidApp.requestMicPermission) {
+        window.AndroidApp.requestMicPermission();
+    }
+}
+
+// ===============================
 // VOICE TO TEXT (DICTATION) - FIXED VERSION
 // ===============================
 let isListening = false;
@@ -220,6 +229,10 @@ if (SpeechRecognition) {
 
     window.toggleDictation = function() {
         if (!isListening) {
+
+            // request native Android mic permission FIRST
+            requestAndroidMicPermission();
+
             recognition.lang = languageSelect ? languageSelect.value : 'en-US';
             try {
                 recognition.start();

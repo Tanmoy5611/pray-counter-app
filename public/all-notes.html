@@ -31,12 +31,12 @@
             <i class="bi bi-arrow-left"></i>
         </button>
 
-        <button onclick="goToCounter()" title="Back to Counter">
-            <i class="bi bi-house-heart-fill"></i>
-        </button>
-
         <button id="themeToggle" title="Toggle Light / Dark Mode">
             <i id="themeIcon" class="bi bi-moon-stars"></i>
+        </button>
+
+        <button onclick="goToCounter()" title="Back to Counter">
+            <i class="bi bi-house-heart-fill"></i>
         </button>
 
         <button onclick="location.href='inbox.html'">
@@ -51,7 +51,7 @@
 </header>
 
 <!-- ================= TOOLBAR ================= -->
-<section class="notes-toolbar">
+<section class="notes-toolbar split">
 
     <!-- Search -->
     <div class="toolbar-group search-group">
@@ -87,10 +87,7 @@
         >
             <i class="bi bi-sort-up"></i>
         </button>
-    </div>
 
-    <!-- Export -->
-    <div class="toolbar-group">
         <button
                 class="icon-btn"
                 onclick="exportNotes()"
@@ -98,6 +95,7 @@
         >
             <i class="bi bi-box-arrow-up"></i>
         </button>
+
     </div>
 
 </section>

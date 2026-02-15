@@ -19,7 +19,7 @@
 
 <!-- ===== HEADER ===== -->
 <header class="inbox-header">
-  <div class="header-left">
+  <div class="header-left clickable" onclick="goToCounter()">
     <i class="bi bi-chat-dots"></i>
     <span>Inbox</span>
   </div>
@@ -66,6 +66,20 @@
 <button class="fab-btn" title="New Chat">
   <i class="bi bi-plus-lg"></i>
 </button>
+
+<!-- DELETE CHAT MODAL -->
+<div id="deleteModal" class="modal-overlay">
+  <div class="modal-content">
+    <i class="bi bi-trash3-fill modal-icon"></i>
+    <h3>Delete Chat?</h3>
+    <p>This will permanently remove your conversation.</p>
+
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeDeleteModal()">Cancel</button>
+      <button id="confirmDeleteBtn" class="modal-btn confirm">Delete</button>
+    </div>
+  </div>
+</div>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
