@@ -187,6 +187,22 @@
 
     #nightToggle:checked ~ .app-header .glow-title { color: rgba(200, 200, 200, 0.35); }
 
+    /* Night Mode Hover for Nav Buttons */
+    #nightToggle:checked ~ .app-header .nav button:hover,
+    #nightToggle:checked ~ .app-header .nav .night-btn:hover {
+      background: rgba(140, 120, 255, 0.18);
+      color: rgba(200, 180, 255, 0.95);
+      border-color: rgba(140, 120, 255, 0.35);
+      box-shadow: 0 0 12px rgba(140, 120, 255, 0.25);
+    }
+
+    /* Stronger click effect in night mode */
+    #nightToggle:checked ~ .app-header .nav button:active,
+    #nightToggle:checked ~ .app-header .nav .night-btn:active {
+      transform: scale(0.92);
+      background: rgba(140, 120, 255, 0.28);
+    }
+
     /* Target the new beadNumber and Container for Night Mode */
     #nightToggle:checked ~ #jaapContainer #beadNumber {
       color: rgba(255, 255, 255, 0.14);
