@@ -1,7 +1,3 @@
-// ===============================
-// all-notes.js (FIXED & STABLE)
-// ===============================
-
 // Firebase
 const auth = firebase.auth();
 const db = firebase.database();
@@ -14,9 +10,7 @@ const searchInput = document.getElementById("searchInput");
 let currentUser = null;
 let allNotes = [];
 
-// ===============================
-// AUTH CHECK
-// ===============================
+// Auth check
 auth.onAuthStateChanged(user => {
     if (!user) {
         window.location.href = "login.html";
@@ -27,9 +21,7 @@ auth.onAuthStateChanged(user => {
     loadNotes(user.uid);
 });
 
-// ===============================
-// LOAD NOTES
-// ===============================
+// Load notes
 function loadNotes(uid) {
     db.ref(`notes/${uid}`)
         .once("value")
@@ -61,12 +53,7 @@ function loadNotes(uid) {
         });
 }
 
-// ===============================
-// RENDER NOTES
-// ===============================
-// ===============================
-// RENDER NOTES (UI ENHANCED)
-// ===============================
+// Render notes (UI enhanced)
 function renderNotes(notes) {
     notesList.innerHTML = "";
 
@@ -119,9 +106,7 @@ function renderNotes(notes) {
 }
 
 
-// ===============================
-// SEARCH
-// ===============================
+// Search
 searchInput.addEventListener("input", () => {
     const q = searchInput.value.toLowerCase();
 
@@ -132,8 +117,7 @@ searchInput.addEventListener("input", () => {
     renderNotes(filtered);
 });
 
-// SORTING (PINNED NOTES ALWAYS TOP)
-// ===============================
+// Sorting (Pinned notes always top)
 function sortNewest() {
     const sorted = [...allNotes].sort((a, b) => {
         // First priority: Pinned status
@@ -152,9 +136,7 @@ function sortOldest() {
     renderNotes(sorted);
 }
 
-// ===============================
-// PIN / UNPIN
-// ===============================
+// Pin / Unpin
 function togglePin(noteId, isPinned) {
     db.ref(`notes/${currentUser.uid}/${noteId}/pinned`)
         .set(!isPinned)
@@ -162,17 +144,13 @@ function togglePin(noteId, isPinned) {
         .catch(err => console.error("Pin error:", err));
 }
 
-// ===============================
-// EDIT
-// ===============================
+// Edit notes
 function editNote(noteId) {
     localStorage.setItem("editNoteId", noteId);
     window.location.href = "notes.html";
 }
 
-// ===============================
-// DELETE
-// ===============================
+// Delete notes
 function deleteNote(noteId) {
     if (!confirm("Delete this note?")) return;
 
@@ -182,9 +160,7 @@ function deleteNote(noteId) {
         .catch(err => alert("Delete failed"));
 }
 
-// ===============================
-// EXPORT
-// ===============================
+// Export notes
 function exportNotes() {
     if (allNotes.length === 0) {
         alert("No notes to export.");
@@ -231,9 +207,7 @@ function exportNotes() {
     doc.save("Prayer-Notes.pdf");
 }
 
-// ===============================
-// NAV
-// ===============================
+// Nav
 function goBack() {
     window.location.href = "notes.html";
 }
@@ -248,9 +222,7 @@ function focusSearch() {
 
 window.focusSearch = focusSearch;
 
-// ===============================
-// GLOBALS
-// ===============================
+// Global variables
 window.editNote = editNote;
 window.deleteNote = deleteNote;
 window.togglePin = togglePin;

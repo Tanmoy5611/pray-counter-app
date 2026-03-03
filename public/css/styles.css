@@ -1,12 +1,4 @@
-/* ==========================================================================
-   PRAY COUNTER - ULTRA-ADVANCED RESPONSIVE STYLESHEET
-   Target: Mobile (1st Priority) & Desktop (High-End Rendering)
-   Theme: Spiritual Technology / Minimalist Glow
-   ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. ROOT VARIABLES & THEME ENGINE
-   -------------------------------------------------------------------------- */
+/* Root Variables */
 :root {
     /* Core Branding Colors (Derived from your Prayer Beads Icon) */
     --accent-primary: #8e84f4;    /* Glowing Purple */
@@ -29,9 +21,7 @@
     --space-desktop: 3rem;
 }
 
-/* --------------------------------------------------------------------------
-   2. GLOBAL RESET & SCROLLBAR
-   -------------------------------------------------------------------------- */
+/* Global styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -57,9 +47,7 @@
     background: var(--accent-primary);
 }
 
-/* --------------------------------------------------------------------------
-   3. DYNAMIC BODY & BACKGROUNDS
-   -------------------------------------------------------------------------- */
+/* Dynamic background and styling */
 body {
     display: flex;
     flex-direction: column;
@@ -77,23 +65,21 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🌞 Light Theme Context */
+/* Light Theme Context */
 body.light {
     background-color: #f8f9fa;
     background-image: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     color: #1e293b;
 }
 
-/* 🌙 Dark Theme Context */
+/* Dark Theme Context */
 body.dark {
     background-color: #0b0b0d;
     background-image: linear-gradient(135deg, #0b0b0d 0%, #1a1a1c 50%, #0b0b0d 100%);
     color: #f8fafc;
 }
 
-/* --------------------------------------------------------------------------
-   4. HEADER & NAV (GLASSMORPHISM)
-   -------------------------------------------------------------------------- */
+/* Header and nav */
 header {
     width: 100%;
     display: flex;
@@ -155,9 +141,7 @@ body.dark header {
     transform: translateY(-2px);
 }
 
-/* --------------------------------------------------------------------------
-   5. MAIN CONTENT ENGINE
-   -------------------------------------------------------------------------- */
+/* Main Content */
 main {
     flex-grow: 1;
     display: flex;
@@ -172,9 +156,7 @@ main {
 }
 
 
-/* ===============================
-   PRAYER BUTTON CORE RESET
-================================ */
+/* Prayer button container */
 
 .circle-wrapper {
     position: relative;
@@ -182,9 +164,7 @@ main {
     margin-top: clamp(0.5rem, 2vh, 2rem);
 }
 
-/* ===============================
-   OUTER GLOWING RING
-================================ */
+/* Outer circle ring */
 
 .circle-ring {
     position: absolute;
@@ -215,9 +195,7 @@ main {
     }
 }
 
-/* ===============================
-   MAIN PRAYER BUTTON
-================================ */
+/* Main prayer button */
 
 .prayer-button,
 #tapButton {
@@ -297,9 +275,7 @@ main {
             inset 0 0 10px rgba(0, 191, 255, 0.2);
 }
 
-/* ===============================
-   INNER BLUE RING (HOVER)
-================================ */
+/* Inner blue ring hover */
 
 .prayer-button::before,
 #tapButton::before {
@@ -327,9 +303,7 @@ main {
     transform: scale(1);
 }
 
-/* ===============================
-   BUBBLE TAP EFFECT
-================================ */
+/* Bubble tap effect */
 
 .bubble {
     position: absolute;
@@ -354,18 +328,14 @@ main {
     }
 }
 
-/* ===============================
-   CLICK SAFETY FIX
-================================ */
+/* Click safety  */
 
 .circle-ring {
     z-index: 0 !important;
     pointer-events: none !important;
 }
 
-/* --------------------------------------------------------------------------
-   7. COUNTER CONTROLS (+ / -)
-   -------------------------------------------------------------------------- */
+/* Counter Controls + - */
 .counter-controls {
     display: flex;
     gap: 25px;
@@ -400,9 +370,7 @@ main {
     transform: scale(0.9);
 }
 
-/* --------------------------------------------------------------------------
-   8. SETTINGS & PROFILE CARDS
-   -------------------------------------------------------------------------- */
+/* Settings and Profiles card */
 .settings-card, .adjust-container {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -454,9 +422,7 @@ body.light .settings-card {
     line-height: 1.4;
 }
 
-/* --------------------------------------------------------------------------
-   9. FORMS & INPUTS
-   -------------------------------------------------------------------------- */
+/* Forms and input */
 .input-group {
     position: relative;
     width: 100%;
@@ -492,9 +458,7 @@ input:focus {
     border-color: var(--accent-primary);
 }
 
-/* --------------------------------------------------------------------------
-   10. THE BUBBLE PARTICLE ENGINE
-   -------------------------------------------------------------------------- */
+/* The bubble practical styles*/
 .bubble {
     position: absolute;
     width: 50px;
@@ -511,9 +475,7 @@ input:focus {
     100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
 }
 
-/* --------------------------------------------------------------------------
-   11. FOOTER STYLING
-   -------------------------------------------------------------------------- */
+/* Footer style */
 footer {
     padding: 2rem;
     text-align: center;
@@ -522,9 +484,7 @@ footer {
     letter-spacing: 1px;
 }
 
-/* --------------------------------------------------------------------------
-   12. MOBILE OPTIMIZATIONS (HIGH PRIORITY)
-   -------------------------------------------------------------------------- */
+/* Mobile optimizations */
 @media (max-width: 600px) {
     main {
         padding: 1.5rem;
@@ -564,9 +524,7 @@ footer {
     }
 }
 
-/* --------------------------------------------------------------------------
-   13. DESKTOP REFINEMENTS
-   -------------------------------------------------------------------------- */
+/* Desktop optimizations */
 @media (min-width: 1024px) {
     .settings-main {
         flex-direction: row;
@@ -587,9 +545,7 @@ footer {
     to { transform: translateY(-5px); }
 }
 
-/* --------------------------------------------------------------------------
-   14. UTILITY CLASSES (FOR JS INTEGRATION)
-   -------------------------------------------------------------------------- */
+/* Utility classes for js */
 .hidden { display: none !important; }
 
 .flex-center {
@@ -619,9 +575,7 @@ footer {
 
 
 
-    /* ===============================
-       FIXES & OPTIMIZATIONS PATCH
-       =============================== */
+    /* fixed optimizations */
 
 :root {
     /* Fixes the flickering nav buttons by defining the missing variable */

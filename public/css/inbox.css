@@ -1,7 +1,3 @@
-/* ==========================================================================
-   ADVANCED INBOX UI - COMPLETE & FIXED
-   ========================================================================== */
-
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -18,7 +14,7 @@ body {
     transition: background 0.3s ease;
 }
 
-/* ===== HEADER ===== */
+/* Header */
 .inbox-header {
     height: 64px;
     background: #075e54;
@@ -63,7 +59,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* ===== MAIN CONTAINER ===== */
+/* Main Container */
 .inbox-main {
     flex: 1;
     padding: 16px;
@@ -73,7 +69,7 @@ body {
     margin: 0 auto;
 }
 
-/* ===== SEARCH BAR: FIXED ALIGNMENT ===== */
+/* Search Bar: Fixed Alignment */
 .search-container {
     position: relative;
     width: 100%;
@@ -86,7 +82,7 @@ body {
     position: absolute;
     left: 18px;
     top: 50%;
-    transform: translateY(-50%); /* This centers it perfectly */
+    transform: translateY(-50%); /* centers it perfectly */
     color: #888;
     font-size: 18px;
     pointer-events: none;
@@ -112,7 +108,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== CHAT LIST ===== */
+/* Chat List */
 .chat-list {
     list-style: none;
     padding: 0;
@@ -150,7 +146,7 @@ body {
 
 .chat-meta { text-align: right; min-width: 65px; font-size: 12px; color: #888; }
 
-/* ===== FAB BUTTON ===== */
+/* Fab button */
 .fab-btn {
     position: fixed;
     bottom: 30px;
@@ -173,7 +169,7 @@ body {
 
 .fab-btn:hover { transform: scale(1.1) rotate(90deg); }
 
-/* ===== DARK MODE ===== */
+/* Dark Mode */
 body.dark { background: #0b1414; }
 
 body.dark .inbox-header { background: #162424; }
@@ -274,7 +270,7 @@ body.dark .chat-preview { color: #999; }
     opacity: 0.85;
 }
 
-/* ================= MODAL ================= */
+/* Modal */
 .modal-overlay {
     position: fixed;
     inset: 0;

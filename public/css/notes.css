@@ -1,7 +1,3 @@
-/* ==========================================================================
-   PRAYER NOTES - ELITE DYNAMIC UI (FULL)
-   ========================================================================== */
-
 :root {
     --accent-purple: #a280ff;
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -15,7 +11,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-/* ===== BASE BODY (LIGHT MODE BY DEFAULT) ===== */
+/* Base Body (Light Mode By Default) */
 body {
     margin: 0;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -29,7 +25,7 @@ body {
     transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
 }
 
-/* ===== DYNAMIC BACKGROUND BLOB ===== */
+/* Dynamic Background Blob */
 body::before {
     content: "";
     position: fixed;
@@ -53,7 +49,7 @@ body.dark::before {
     to { transform: translate(100vw, 50vh); }
 }
 
-/* ===== HEADER ===== */
+/* Header */
 .notes-header {
     padding: 60px 20px 30px;
     text-align: center;
@@ -106,7 +102,7 @@ body.dark .notes-header h1 {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== MAIN NOTE AREA ===== */
+/* Main note area */
 .notes-main {
     flex: 1;
     width: 100%;
@@ -150,7 +146,7 @@ body.dark .notes-header h1 {
     opacity: 0.7;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* Action Buttons */
 .notes-actions {
     margin-top: 40px;
 }
@@ -171,7 +167,7 @@ body.dark .notes-header h1 {
     transition: opacity 0.3s ease;
 }
 
-/* ===== DARK MODE OVERRIDES (Applied via theme.js) ===== */
+/* Dark mode styles */
 body.dark {
     background: var(--bg-dark) !important;
     color: #e0e0e0 !important;
@@ -207,7 +203,7 @@ body.dark #charCounter {
     color: var(--accent-purple);
 }
 
-/* ===== KEYFRAMES ===== */
+/* Keyframes for animations */
 @keyframes scaleUp {
     from { opacity: 0; transform: scale(0.98) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
@@ -219,7 +215,7 @@ body.dark #charCounter {
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* ===== DICTATION ACTIVE STATE ===== */
+/* Dictation Active State */
 #dictationBtn.listening {
     background: rgba(255, 68, 68, 0.2) !important;
     border-color: #ff4444 !important;
@@ -241,10 +237,6 @@ body.dark #charCounter {
     .nav button, .notes-actions button { width: 48px; height: 48px; }
 }
 
-
-/* ==========================================================================
-   ADVANCED LANGUAGE SELECTOR STYLING
-   ========================================================================== */
 
 .theme-select {
     appearance: none; /* Removes default browser styling */

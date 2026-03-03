@@ -1,4 +1,3 @@
-
 :root {
     --accent-purple: #a280ff;
     --accent-red: #ff5f5f;
@@ -10,7 +9,7 @@
     --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* ===== BASE SETUP ===== */
+/* Base Setup */
 body {
     margin: 0;
     padding: 0;
@@ -27,7 +26,7 @@ body.dark {
     color: #e0e0e0 !important;
 }
 
-/* ===== DYNAMIC BACKGROUND BLOB ===== */
+/* Dynamic background gradient */
 body::before {
     content: "";
     position: fixed;
@@ -49,7 +48,7 @@ body.dark::before { opacity: 1; }
     to { transform: translate(-30vw, 20vh) rotate(180deg); }
 }
 
-/* ===== HEADER & NAVIGATION (FIXED CENTERED) ===== */
+/* Header & Navigation (Centered) */
 .notes-header {
     display: flex;
     flex-direction: column;
@@ -89,7 +88,7 @@ body.dark .notes-header h1 {
     transform: none !important;
 }
 
-/* ===== ICON BUTTONS (Main) ===== */
+/* Icon Button Main */
 .icon-btn, .nav button {
     background: white;
     border: 1px solid #ddd;
@@ -119,7 +118,7 @@ body.dark .icon-btn, body.dark .nav button {
     box-shadow: 0 10px 20px rgba(162, 128, 255, 0.3);
 }
 
-/* ===== TOOLBAR (SEARCH & SORT) ===== */
+/* Toolbars and Search */
 .notes-toolbar {
     max-width: 1000px;
     margin: 0 auto 40px;
@@ -156,7 +155,7 @@ body.dark .toolbar-group {
     font-weight: 500;
 }
 
-/* ===== NOTE CARDS ===== */
+/* Note Cards */
 .notes-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -209,7 +208,7 @@ body.dark .note-card {
     margin-bottom: 20px;
 }
 
-/* ===== CARD ACTION BUTTONS ===== */
+/* Card Actions Buttons */
 .note-actions {
     display: flex;
     gap: 10px;
@@ -243,7 +242,7 @@ body.light .note-actions button {
     border: none;
 }
 
-/* ===== ANIMATIONS ===== */
+/* Animations */
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
@@ -262,7 +261,7 @@ body.light .note-actions button {
     .notes-toolbar { flex-direction: column; align-items: stretch; }
 }
 
-/* ===== NAV ICON BUTTONS (Premium hover like Home page) ===== */
+/* Nav icon buttons (Premium hover like Home page) */
 .nav button {
     position: relative;
     background: rgba(255, 255, 255, 0.04);
@@ -300,7 +299,7 @@ body.light .note-actions button {
     box-shadow: 0 0 0 2px rgba(162, 128, 255, 0.5);
 }
 
-/* ===== TOOLBAR SPLIT LAYOUT ===== */
+/* Toolbar split layout */
 .notes-toolbar.split {
     display: flex;
     justify-content: space-between;

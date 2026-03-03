@@ -1,7 +1,3 @@
-// ======================================================================
-// CHAT.JS — FINAL CLEAN BUILD (Keyboard & Scroll Optimized)
-// ======================================================================
-
 const auth = firebase.auth();
 const db = firebase.database();
 
@@ -24,9 +20,7 @@ if (!otherUid) {
 const getChatId = (a, b) => [a, b].sort().join("_");
 const formatTime = ts => new Date(ts).toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 
-// ======================================================================
-// AUTH & CORE LOGIC
-// ======================================================================
+// Auth and core logic
 auth.onAuthStateChanged(user => {
     if (!user) return location.href = "login.html";
 
@@ -50,9 +44,8 @@ auth.onAuthStateChanged(user => {
         if (!window.isOtherTyping) {
             if (u.online) {
                 typingStatus.textContent = "online";
-                typingStatus.style.color = "#25d366"; //  keep it green
+                typingStatus.style.color = "#25d366"; // green
             } else if (u.lastSeen) {
-                // UPDATED CALCULATION
                 const diffMs = Date.now() - u.lastSeen;
                 typingStatus.textContent = `active ${formatLastSeen(diffMs)} ago`;
                 typingStatus.style.color = ""; // Reset to default muted color
@@ -161,9 +154,7 @@ auth.onAuthStateChanged(user => {
     });
 });
 
-// ======================================================================
-// UI FUNCTIONS
-// ======================================================================
+// UI functions
 function renderMessage(msg, myUid, msgId) {
     const bubble = document.createElement("div");
     bubble.className = "bubble " + (msg.from === myUid ? "me" : "other");
@@ -204,15 +195,15 @@ function confirmDeleteMessage(msgId) {
     messageToDeleteId = msgId;
     const modal = document.getElementById("deleteModal");
 
-    // 1. Provide haptic feedback via Android Bridge
+    // Provide haptic feedback via Android Bridge
     if (window.AndroidApp && window.AndroidApp.vibrate) {
         window.AndroidApp.vibrate(40);
     }
 
-    // 2. Show the custom modal
+    // Show the custom modal
     modal.classList.add("show");
 
-    // 3. Set up the "Delete" button listener
+    // Set up the "Delete" button listener
     const confirmBtn = document.getElementById("confirmDeleteBtn");
     confirmBtn.onclick = () => {
         const myUid = auth.currentUser.uid;
@@ -260,13 +251,11 @@ scrollBtn.addEventListener("click", () => {
 });
 
 
-// ======================================================================
-// NOTIFICATIONS
-// ======================================================================
+// Notification Logic
 const notificationChatRef = db.ref("chats");
 
 notificationChatRef.limitToLast(1).on("child_added", (snapshot) => {
-    // Note: currentUser needs to be defined from the auth listener or used from auth.currentUser
+    // currentUser needs to be defined from the auth listener or used from auth.currentUser
     const message = snapshot.val();
     const user = auth.currentUser;
 
@@ -282,7 +271,7 @@ function showLocalNotification(name, text) {
             icon: "assets/icons/icon-72.png"
         });
 
-        // Bonus: Vibrate the phone when a message arrives!
+        //  Vibrate the phone when a message arrives
         if (window.AndroidApp && window.AndroidApp.vibrate) {
             window.AndroidApp.vibrate(100);
         }
@@ -291,9 +280,7 @@ function showLocalNotification(name, text) {
     }
 }
 
-// ======================================================================
-// THE CRITICAL MOBILE KEYBOARD FIX
-// ======================================================================
+// Mobile keyboard fix
 const handleViewportResize = () => {
     if (window.visualViewport) {
         const vh = window.visualViewport.height;

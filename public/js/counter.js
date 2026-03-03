@@ -1,13 +1,9 @@
-// =======================================================
-// NAM JAAP JS — CLEAN + SAFE + SETTINGS-SYNCED LOOP
-// =======================================================
-
-//  Firebase (UNCHANGED)
+//  Firebase
 const auth = firebase.auth();
 const db = firebase.database();
 let currentUser = null;
 
-//  TOTAL TAP COUNT (ONLY value stored in DB)
+//  Total jaap count (only stored in DB)
 let jaapCount = 0;
 
 //  CONFIG (Now loads from Settings)
@@ -17,25 +13,21 @@ let BEADS_PER_LOOP = parseInt(localStorage.getItem("loopGoal")) || 33;
 let loopCount = 0;
 let beadCount = 0;
 
-// =======================================================
-//  DOM ELEMENTS (MATCH CURRENT HTML EXACTLY)
-// =======================================================
+// Dom Elements (Match current HTML exactly)
 
-//  TAP AREA
+//  Tap Area
 const jaapArea = document.getElementById("jaapContainer");
 
-//  DISPLAY ELEMENTS
+//  Display Elements
 const loopText    = document.getElementById("loopText");
 const totalText   = document.getElementById("totalText");
 const beadNumber  = document.getElementById("beadNumber");
 const beadTotalUI = document.getElementById("beadTotal"); // The "/ 33 ✏️" display
 
-//  HAPTIC INTENSITY (UNCHANGED)
+//  Haptic Intensity
 let currentVibe = localStorage.getItem("vibeIntensity") || 40;
 
-// =======================================================
-//  HAPTIC FEEDBACK (UNCHANGED)
-// =======================================================
+// Haptic Feedback
 function hapticFeedback() {
     if (window.AndroidApp) {
         window.AndroidApp.vibrate(parseInt(currentVibe));
@@ -44,26 +36,22 @@ function hapticFeedback() {
     }
 }
 
-// =======================================================
-//  DERIVE LOOP + BEAD FROM TOTAL
-// =======================================================
+// Derived Loop + Bead from Total
 function calculateDerivedCounts() {
-    // Ensure we use the latest goal from local storage in case it changed
+    // Ensure to use the latest goal from local storage in case it changed
     BEADS_PER_LOOP = parseInt(localStorage.getItem("loopGoal")) || 33;
 
     loopCount = Math.floor(jaapCount / BEADS_PER_LOOP);
     beadCount = jaapCount % BEADS_PER_LOOP;
 
-    // Fix exact loop boundary (e.g. 108 → bead 108, not 0)
+    //  exact loop boundary (e.g. 108 - bead 108, not 0)
     if (beadCount === 0 && jaapCount !== 0) {
         beadCount = BEADS_PER_LOOP;
         loopCount--;
     }
 }
 
-// =======================================================
-//  UPDATE UI (SAFE)
-// =======================================================
+// update UI
 function updateUI() {
     if (loopText) {
         const newText = `LOOP ${loopCount}`;
@@ -84,15 +72,13 @@ function updateUI() {
         beadNumber.textContent = beadCount;
     }
 
-    // This updates the display to show "/ 108 ✏️" instead of just "/ 33"
+    // use to display the  show "/ 108 ✏️" instead of just "/ 33"
     if (beadTotalUI) {
         beadTotalUI.innerHTML = `/ ${BEADS_PER_LOOP} <i class="bi bi-sliders"></i>️`;
     }
 }
 
-// =======================================================
-//  AUTH LISTENER — LOAD TOTAL ONLY
-// =======================================================
+// auth listener
 auth.onAuthStateChanged(user => {
     if (!user) {
         window.location.href = "login.html";
@@ -111,9 +97,7 @@ auth.onAuthStateChanged(user => {
         });
 });
 
-// =======================================================
-//  TAP HANDLER — INCREMENT TOTAL + ANIMATION FIX
-// =======================================================
+// Tap handler
 jaapArea.addEventListener("pointerdown", (e) => {
     if (!currentUser) return;
 
@@ -127,7 +111,7 @@ jaapArea.addEventListener("pointerdown", (e) => {
     calculateDerivedCounts();
     updateUI();
 
-    // 🔥 TRIGGER ANIMATION
+    // TRIGGER ANIMATION
     if (beadNumber) {
         // Remove class to reset
         beadNumber.classList.remove("pulse-text");
@@ -146,9 +130,7 @@ jaapArea.addEventListener("pointerdown", (e) => {
     saveDebounced();
 });
 
-// =======================================================
-//  DEBOUNCED SAVE — TOTAL ONLY
-// =======================================================
+// Debounced save (Total only)
 let saveTimer;
 function saveDebounced() {
     clearTimeout(saveTimer);

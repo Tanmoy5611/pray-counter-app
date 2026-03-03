@@ -14,9 +14,7 @@ const charCounter = document.getElementById("charCounter");
 const MAX_CHARS = 100000;
 let currentUser = null;
 
-// ===============================
-// AUTH STATE LISTENER
-// ===============================
+// Auth state listener
 auth.onAuthStateChanged(user => {
     if (!user) {
         window.location.href = "login.html";
@@ -34,9 +32,7 @@ auth.onAuthStateChanged(user => {
     updateCharCount();
 });
 
-// ===============================
-// LOAD NOTE FOR EDITING
-// ===============================
+// Load note for editing
 function loadNoteForEdit(noteId) {
     db.ref(`notes/${currentUser.uid}/${noteId}`)
         .once("value")
@@ -52,9 +48,7 @@ function loadNoteForEdit(noteId) {
         });
 }
 
-// ===============================
-// SAVE NOTE (NEW OR EDIT)
-// ===============================
+// Save note (new or edit)
 function saveNote() {
     if (!currentUser) {
         showStatus("⚠️ Please log in.", "orange");
@@ -98,9 +92,7 @@ function saveNote() {
         });
 }
 
-// ===============================
-// CHARACTER COUNTER
-// ===============================
+// Character counter
 function updateCharCount() {
     if (!textarea || !charCounter) return;
 
@@ -118,9 +110,7 @@ if (textarea) {
     textarea.addEventListener("input", updateCharCount);
 }
 
-// ===============================
-// NAVIGATION
-// ===============================
+// Navigation
 function goToCounter() {
     window.location.href = "index.html";
 }
@@ -129,9 +119,7 @@ function goToAllNotes() {
     window.location.href = "all-notes.html";
 }
 
-// ===============================
-// SIGN OUT
-// ===============================
+// Signout
 function signOut() {
     auth.signOut()
         .then(() => {
@@ -144,18 +132,14 @@ function signOut() {
         });
 }
 
-// ===============================
-//  ANDROID MIC PERMISSION (ADDED)
-// ===============================
+// Android mic permission
 function requestAndroidMicPermission() {
     if (window.AndroidApp && window.AndroidApp.requestMicPermission) {
         window.AndroidApp.requestMicPermission();
     }
 }
 
-// ===============================
-// VOICE TO TEXT (DICTATION) - FIXED VERSION
-// ===============================
+// Voice to text
 let isListening = false;
 const micIcon = document.getElementById('micIcon');
 const dictationBtn = document.getElementById('dictationBtn');
@@ -165,7 +149,7 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
 
-    // CRITICAL FIX: Disable interimResults to stop duplicate words/fragments.
+    //  Disable interimResults to stop duplicate words/fragments.
     // Setting this to false ensures only 100% final sentences are sent to the textarea.
     recognition.continuous = true;
     recognition.interimResults = false;
@@ -243,7 +227,7 @@ if (SpeechRecognition) {
                 setTimeout(() => recognition.start(), 300);
             }
         } else {
-            // CRITICAL: Set isListening to false BEFORE calling stop()
+            //  Set isListening to false BEFORE calling stop()
             // so the onend event knows not to restart the mic.
             isListening = false;
             recognition.stop();
@@ -264,9 +248,7 @@ if (SpeechRecognition) {
 }
 
 
-// ===============================
-// COPY TO CLIPBOARD
-// ===============================
+// Copy to clipboard
 function copyToClipboard() {
     const copyIcon = document.getElementById('copyIcon');
     const copyBtn = document.getElementById('copyBtn');
@@ -293,9 +275,7 @@ function copyToClipboard() {
     });
 }
 
-// ===============================
-// UI HELPERS
-// ===============================
+// UI helpers
 function showStatus(text, color) {
     if (!saveStatus) return;
     saveStatus.innerText = text;
@@ -307,9 +287,7 @@ function showStatus(text, color) {
     }, 3000);
 }
 
-// ===============================
-// EXPOSE FUNCTIONS FOR HTML
-// ===============================
+// functions for html
 window.saveNote = saveNote;
 window.goToCounter = goToCounter;
 window.goToAllNotes = goToAllNotes;

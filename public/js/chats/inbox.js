@@ -10,12 +10,9 @@ let currentUser = null;
 let allUsers = {};
 
 // Track chat to delete
-// ===============================
 let chatToDelete = null;
 
-// =====================================
 // AUTH
-// =====================================
 auth.onAuthStateChanged(user => {
     if (!user) {
         window.location.href = "login.html";
@@ -29,9 +26,7 @@ auth.onAuthStateChanged(user => {
     });
 });
 
-// =====================================
-// LOAD ALL USERS (for inbox + search)
-// =====================================
+// load all users (for inbox + search)
 function loadAllUsers(callback) {
     db.ref("users").on("value", snap => {
         allUsers = snap.val() || {};
@@ -39,9 +34,7 @@ function loadAllUsers(callback) {
     });
 }
 
-// =====================================
-// LOAD CHATS (INBOX LIST)
-// =====================================
+// Load chats (inbox list)
 function loadChats() {
     db.ref("chats").on("value", snap => {
         chatList.innerHTML = "";
@@ -80,7 +73,7 @@ function loadChats() {
                 </div>
                 <div class="chat-right">
                     <div class="chat-time">${lastTime}</div>
-                    <!-- DELETE BUTTON -->
+                    <!-- Delete button -->
                     <button class="delete-chat-btn"
                         onclick="deleteChat(event, '${chatId}')">
                         <i class="bi bi-trash3"></i>
@@ -97,15 +90,13 @@ function loadChats() {
     });
 }
 
-// =====================================
-// DELETE CHAT (CHAT-STYLE MODAL)
-// =====================================
+// Delete chat (chat-style modal)
 function deleteChat(event, chatId) {
     event.stopPropagation(); // prevent opening chat
 
     chatToDelete = chatId;
 
-    // 🔔 Haptic feedback
+    // Haptic feedback
     if (window.AndroidApp?.vibrate) {
         window.AndroidApp.vibrate(40);
     }
@@ -121,7 +112,7 @@ function closeDeleteModal() {
     chatToDelete = null;
 }
 
-// 🔴 NEW: Confirm delete (shared pattern)
+//  Confirm delete (shared pattern)
 function confirmDeleteChat() {
     if (!chatToDelete) return;
 
@@ -142,9 +133,7 @@ function confirmDeleteChat() {
 //  Bind confirm button ONCE
 document.getElementById("confirmDeleteBtn").onclick = confirmDeleteChat;
 
-// =====================================
-// SEARCH USERS → START NEW CHAT
-// =====================================
+// Search users - Start new chat
 searchInput.addEventListener("input", () => {
     const q = searchInput.value.trim().toLowerCase();
     chatList.innerHTML = "";
@@ -182,9 +171,7 @@ searchInput.addEventListener("input", () => {
     });
 });
 
-// =====================================
-// START / OPEN CHAT
-// =====================================
+// Start / Open chat/
 function startChat(otherUid) {
     const chatId = [currentUser.uid, otherUid].sort().join("_");
     const chatRef = db.ref("chats/" + chatId);
@@ -208,9 +195,7 @@ function startChat(otherUid) {
     });
 }
 
-// =====================================
-// TIME FORMAT (SAFE)
-// =====================================
+// Time format
 function formatTime(ts) {
     if (!ts) return "";
     const d = new Date(ts);

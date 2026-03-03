@@ -1,7 +1,3 @@
-// =======================================================
-// SETTINGS & PROFILE MANAGEMENT (With Multi-Count Editor)
-// =======================================================
-
 const auth = firebase.auth();
 const db = firebase.database();
 let currentUser = null;
@@ -9,7 +5,7 @@ let currentUser = null;
 // Vibration State Management
 let currentVibeIntensity = localStorage.getItem('vibeIntensity') || 40;
 
-// 🔔 Haptic Feedback Function
+// Haptic Feedback Function
 function hapticTap(customIntensity = null) {
     const intensity = customIntensity || parseInt(currentVibeIntensity);
     if (intensity === 0) return;
@@ -22,7 +18,7 @@ function hapticTap(customIntensity = null) {
     }
 }
 
-// --- Auth & Data Loading ---
+// Auth & Data Loading
 auth.onAuthStateChanged(user => {
     if (!user) {
         window.location.href = "login.html";
@@ -30,7 +26,7 @@ auth.onAuthStateChanged(user => {
     }
     currentUser = user;
 
-    // 1. Load Name
+    // Load Name
     db.ref(`users/${user.uid}/profile/name`)
         .once("value")
         .then(snap => {
@@ -39,7 +35,7 @@ auth.onAuthStateChanged(user => {
             if (nameInput) nameInput.value = savedName;
         });
 
-    // 2. Load Prayer Count (Home Page)
+    // Load Prayer Count (Home Page)
     db.ref("taps/" + user.uid)
         .once("value")
         .then(snap => {
@@ -47,7 +43,7 @@ auth.onAuthStateChanged(user => {
             if (countInput) countInput.value = snap.val() || 0;
         });
 
-    // 3. Load Nam Jaap Count (Nam Jaap Page)
+    // Load Nam Jaap Count (Nam Jaap Page)
     db.ref("jaap_taps/" + user.uid)
         .once("value")
         .then(snap => {
@@ -55,14 +51,14 @@ auth.onAuthStateChanged(user => {
             if (jaapInput) jaapInput.value = snap.val() || 0;
         });
 
-    // 4. Load Loop Goal from LocalStorage
+    // Load Loop Goal from LocalStorage
     const loopGoalInput = document.getElementById("loopGoalInput");
     if (loopGoalInput) {
         loopGoalInput.value = localStorage.getItem("loopGoal") || 33;
     }
 });
 
-// --- Save Profile & Multi-Count Logic ---
+// Save Profile & Multi-Count Logic
 function saveProfileName() {
     const nameInput = document.getElementById("nameInput");
     const countInput = document.getElementById("totalCountInput");
@@ -125,7 +121,7 @@ function saveProfileName() {
         });
 }
 
-// --- Vibration Slider Logic ---
+// Vibration Slider Logic-
 document.addEventListener("DOMContentLoaded", () => {
     const vibeSlider = document.getElementById('vibeIntensity');
     const vibeValueDisplay = document.getElementById('vibeValue');

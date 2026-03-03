@@ -5,15 +5,13 @@ if (!themeToggleBtn || !themeIcon) {
     console.warn("Theme toggle elements not found");
 }
 
-// ===============================
 // Apply theme + update icon & tooltip
-// ===============================
 function applyTheme(theme) {
     document.body.classList.remove("light", "dark");
     document.body.classList.add(theme);
     localStorage.setItem("theme", theme);
 
-    // 🌙 ↔ ☀️ icon switch
+    // theme icon switch
     if (themeIcon) {
         themeIcon.className =
             theme === "dark"
@@ -21,7 +19,7 @@ function applyTheme(theme) {
                 : "bi bi-moon-stars";
     }
 
-    // 🧭 Tooltip text
+    // Tooltip text
     if (themeToggleBtn) {
         themeToggleBtn.title =
             theme === "dark"
@@ -30,15 +28,11 @@ function applyTheme(theme) {
     }
 }
 
-// ===============================
 // Load saved theme (or default)
-// ===============================
 const savedTheme = localStorage.getItem("theme") || "light";
 applyTheme(savedTheme);
 
-// ===============================
 // Toggle on click
-// ===============================
 themeToggleBtn?.addEventListener("click", () => {
     const isDark = document.body.classList.contains("dark");
     applyTheme(isDark ? "light" : "dark");

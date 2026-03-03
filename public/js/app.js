@@ -19,27 +19,23 @@ const minusBtn = document.getElementById("minusBtn");
 // Vibration State Management
 let currentVibeIntensity = localStorage.getItem('vibeIntensity') || 40;
 
-// ===============================
-// 🔔 DYNAMIC HAPTIC FEEDBACK
-// ===============================
+// Dynamic Haptic Feedback
 function hapticTap(customIntensity = null) {
     const intensity = customIntensity || parseInt(currentVibeIntensity);
 
     if (intensity === 0) return; // Silent mode
 
-    // 1. Try standard Web API (Works in most mobile browsers)
+    // Try standard Web API (Works in most mobile browsers)
     if (navigator.vibrate) {
         navigator.vibrate(intensity);
     }
-    // 2. Fallback to Android Studio Java Bridge
+    //  Fallback to Android Studio Java Bridge
     else if (window.AndroidApp && window.AndroidApp.vibrate) {
         window.AndroidApp.vibrate(intensity);
     }
 }
 
-// ===============================
-// REAL-TIME GREETING + QUOTES
-// ===============================
+// Real time greeting
 function setupGreeting(user) {
     const greetingLine = document.getElementById("greetingLine");
     const quoteEl = document.getElementById("spiritualQuote");
@@ -50,32 +46,32 @@ function setupGreeting(user) {
     let greeting = "";
     let quote = "";
 
-    // 🌄 Early Morning (Brahma Muhurta feeling)
+    // Early Morning (Brahma Muhurta feeling)
     if (hour >= 4 && hour < 6) {
         greeting = "Blessed Morning 🌄";
         quote = "The quiet hours before sunrise are a gift to the soul.";
     }
-    // 🌅 Morning
+    // Morning
     else if (hour >= 6 && hour < 10) {
         greeting = "Good Morning 🌅";
         quote = "Start the day with purity of thought and devotion.";
     }
-    // ☀️ Late Morning
+    //  Late Morning
     else if (hour >= 10 && hour < 12) {
         greeting = "Peaceful Morning ☀️";
         quote = "Let your actions flow from devotion.";
     }
-    // 🌞 Afternoon
+    // Afternoon
     else if (hour >= 12 && hour < 17) {
         greeting = "Good Afternoon ☀️";
         quote = "Perform your duty with a calm and steady mind.";
     }
-    // 🌙 Evening
+    // Evening
     else if (hour >= 17 && hour < 21) {
         greeting = "Good Evening 🌙";
         quote = "Let go of the day, surrender all to the Divine.";
     }
-    // 🌌 Night
+    // Night
     else {
         greeting = "Peaceful Night 🌌";
         quote = "Let gratitude close the day.";
@@ -87,9 +83,7 @@ function setupGreeting(user) {
     quoteEl.textContent = `“${quote}”`;
 }
 
-// ===============================
-// VISUAL EFFECTS & DATA SYNC
-// ===============================
+// Visual effects and data sync
 function showBubbleEffect(x, y) {
     if (!bubbleContainer) return;
     const bubble = document.createElement("span");
@@ -117,12 +111,10 @@ function saveTapCount() {
         .catch(err => console.error("Save error:", err));
 }
 
-// ===============================
-// MAIN APP LOGIC
-// ===============================
+// Main app logic
 document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Firebase Auth Listener
+    //  Firebase Auth Listener
     auth.onAuthStateChanged(user => {
         if (user) {
             currentUser = user;
@@ -136,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 2. Settings Slider Listener (If present on page)
+    //  Settings Slider Listener (If present on page)
     const vibeSlider = document.getElementById('vibeIntensity');
     const vibeValueDisplay = document.getElementById('vibeValue');
 
@@ -155,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Counter Interactions
+    //  Counter Interactions
     if (tapButton) {
         tapButton.addEventListener("click", e => {
             if (!currentUser) return alert("Please log in to continue.");

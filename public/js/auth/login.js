@@ -1,7 +1,3 @@
-// ===============================
-// login.js — AUTH + USER NORMALIZER (FIXED)
-// ===============================
-
 const auth = firebase.auth();
 const db = firebase.database();
 
@@ -14,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
     const togglePassword = document.getElementById("togglePassword");
 
-    // ================= LOGIN =================
+    // login
     loginForm.addEventListener("submit", async e => {
         e.preventDefault();
         try {
@@ -29,10 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ================= SIGN UP =================
+    // Sign up
     signupBtn.addEventListener("click", async () => {
         try {
-            // 🔑 IMPORTANT: logout first
+            // logout first
             if (auth.currentUser) {
                 await auth.signOut();
             }
@@ -54,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ================= PASSWORD RESET =================
+    // Password Reset
     forgotPasswordBtn.addEventListener("click", async () => {
         if (!emailInput.value) {
             alert("Enter your email first");
@@ -68,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ================= PASSWORD VISIBILITY =================
+    // Password Visibility Toggle
     togglePassword.addEventListener("click", () => {
         const hidden = passwordInput.type === "password";
         passwordInput.type = hidden ? "text" : "password";
@@ -78,9 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ===============================
-// 🔥 USER NORMALIZATION (AUTO FIX)
-// ===============================
+// User normalization
 auth.onAuthStateChanged(async user => {
     if (!user) return;
 
