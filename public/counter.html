@@ -15,9 +15,12 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background: #000;
       font-family: system-ui, -apple-system, "Inter", sans-serif;
       -webkit-text-size-adjust: 100%;
+    }
+
+    body.light {
+      background: #ffffff;
     }
 
     body.dark {
@@ -224,6 +227,57 @@
       #jaapContainer { top: 88px; height: calc(100% - 88px); }
       .glow-title { font-size: 1.45rem; }
     }
+
+    /* Light mode overrides */
+
+    body.light .glow-title {
+      color: rgba(0,0,0,0.85);
+      text-shadow: none;
+    }
+
+    body.light #loopText {
+      color: rgba(0,0,0,0.6);
+    }
+
+    body.light #totalText {
+      color: rgba(0,0,0,0.4);
+    }
+
+    body.light #beadNumber {
+      color: rgba(0,0,0,0.35);
+      text-shadow: none;
+    }
+
+    body.light #beadTotal {
+      color: rgba(0,0,0,0.4);
+    }
+
+    body.light #hintText {
+      color: rgba(0,0,0,0.4);
+    }
+
+    body.light .nav button,
+    body.light .night-btn {
+      background: rgba(0,0,0,0.05);
+      color: rgba(0,0,0,0.75);
+      border-color: rgba(0,0,0,0.1);
+    }
+
+    body.light #beadNumber {
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* FORCE beadNumber visible in LIGHT mode */
+    body.light #beadNumber{
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      color: rgba(0,0,0,0.55) !important;
+      text-shadow: none !important;
+      z-index: 2 !important;
+      position: relative !important;
+    }
+
   </style>
 </head>
 

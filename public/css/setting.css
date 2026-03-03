@@ -295,7 +295,7 @@ body.light #vibeIntensity {
     border: none;
     outline: none;
 
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--text-main);
     font-size: 1rem;
     font-weight: 500;
 
@@ -319,5 +319,5 @@ body.light #vibeIntensity {
 
 /* placeholder tone */
 .settings-item input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-dim);
 }
